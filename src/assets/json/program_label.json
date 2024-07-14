@@ -1,0 +1,30 @@
+[
+	{
+		"language": "TH",
+		"label": [
+			{"name": "system_label", "value": "Assure"},
+			{"name": "login_label", "value": "เข้าระบบ"},
+			{"name": "username_label", "value": "บัญชีผู้ใช้"},
+			{"name": "password_label", "value": "รหัสผ่าน"},
+			{"name": "forgot_label", "value": "ลืมรหัสผ่าน"},
+			{"name": "signin_label", "value": "เข้าสู่ระบบ"},
+			{"name": "profile_label", "value": "ข้อมูลส่วนตัว"},
+			{"name": "changepwd_label", "value": "เปลี่ยนรหัสผ่าน"},
+			{"name": "logout_label", "value": "ออกจากระบบ"}
+		]
+	},
+	{
+		"language": "EN",
+		"label": [
+			{"name": "system_label", "value": "Assure"},
+			{"name": "login_label", "value": "Log In"},
+			{"name": "username_label", "value": "User name"},
+			{"name": "password_label", "value": "Password"},
+			{"name": "forgot_label", "value": "Forgot Password"},
+			{"name": "signin_label", "value": "Sign In"},
+			{"name": "profile_label", "value": "Profile"},
+			{"name": "changepwd_label", "value": "Change Password"},
+			{"name": "logout_label", "value": "Log Out"}
+		]
+	}
+]
