@@ -1,6 +1,6 @@
-# Vue DEV 
+# Vue Sure 
 
-This project introduce to use Vue 3 framework create single page application.
+This project use Vue 3 framework create single page application for assure login page.
 
 ## Project setup
 ```
