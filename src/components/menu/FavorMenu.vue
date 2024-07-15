@@ -14,7 +14,7 @@
                         </div>
                         <div id="favorbarmenu" class="navbox-tiles">
                             <template v-for="(item,index) in favorite.favorlists" :key="index">
-                                <a v-if="item.type == 'new'" href="javascript:void(0)" @click.stop="newFavorItemClick(item)" class="tile fa-box-title fav-blank" title="New Favorite" :seqno="getFavorSeqno(item,index+1)"><div class="icon"><img class="fa fa-app-image" :src="getDefaultFavorIcon()" alt=""/></div><span class="title">Add New</span></a>
+                                <a v-if="item.type == 'new'" href="javascript:void(0)" @click.stop="newFavorItemClick(item)" class="tile fa-box-title fav-blank" title="New Favorite" :seqno="getFavorSeqno(item,index+1)"><div class="icon"><img class="fa fa-app-image img-favor-icon" alt=""/></div><span class="title">Add New</span></a>
                                 <a v-else href="javascript:void(0)" @click="openFavorItemClick(item)" class="tile fa-box-title fav-app" :seqno="getFavorSeqno(item,index+1)" :pid="item.programid" :url="item.url" :title="item.programid">
                                     <div class="icon"><img class="fa fa-app-image" :src="getFavorIcon(item)" alt=""/></div><span class="title">{{ getDisplayFavorName(item) }}</span>
                                     <ul class="todo"><li @click.stop="deleteFavorItemClick(item,index+1)"><img class='img-delete-icon' title="Delete" width="25px" height="25px"/></li></ul>

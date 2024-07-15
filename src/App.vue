@@ -36,7 +36,7 @@ export default {
 				if(!valid) {
 					removeAccessorInfo();
           this.loginVisible = true;
-          this.$refs.loginForm.focus();
+          setTimeout(() => { this.$refs.loginForm.focus(); },5);          
 				} else {
 					verifyAfterLogin(json,() => {
             this.loginSuccess(json.body);
