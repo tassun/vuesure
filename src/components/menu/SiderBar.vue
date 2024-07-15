@@ -16,8 +16,9 @@ import $ from "jquery";
 import { ref } from 'vue';
 import { getApiUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo";
 import { getAccessorToken } from "@/assets/js/messenger";
-import { openPage } from "@/assets/js/menuutil";
+import { openPage } from "@/assets/js/loginutil";
 import { accessor } from "@/assets/js/accessor.js";
+import { favorite } from "@/assets/js/favorite.js";
 import SiderMenu from "./SiderMenu.vue";
 
 const menuData = {sidemap: {}, sidelist: {}};
@@ -35,7 +36,7 @@ export default {
     const menuItems = ref(menuData);
     const searchingVisible = ref(false);
     const menuFlip = ref(true);
-    return { accessor, menuItems, searchingVisible, menuFlip };
+    return { accessor, favorite, menuItems, searchingVisible, menuFlip };
   },
   mounted() {
     this.$nextTick(() => {
@@ -107,7 +108,7 @@ export default {
     },
     itemMenuSelected(item) {
       console.log("SiderBar.vue: item-menu-selected",item);
-      openPage(item.programid,item.url);
+      openPage(item,this.accessor,this.favorite);
     },
     loadSideBarMenu() {
       console.log("loadSideBarMenu: accessor",this.accessor);

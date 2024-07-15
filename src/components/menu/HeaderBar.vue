@@ -9,15 +9,14 @@
                 <a href="javascript:void(0)" @click="menuSelected('home')" id="homemenutrigger" class="nav-link" title="Home"><em class="fa fa-home"></em></a>		
             </li>	
             <li id="productlayer" class="nav-item">
-                <a href="javascript:void(0)" @click="menuSelected('intro')" id="intromenutrigger" class="nav-link" title="Welcome"><img id="productimage" src="../assets/img/app_logo.png" width="40" height="40" alt="" /></a>		
+                <a href="javascript:void(0)" @click="menuSelected('intro')" id="intromenutrigger" class="nav-link" title="Welcome"><img id="productimage" src="../../assets/img/app_logo.png" width="40" height="40" alt="" /></a>		
             </li>				
             <li id="productlayer" class="nav-item dropdown" >
                 <a href="javascript:void(0)" id="recentmenutrigger" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="History">
                     <span id="programtitle">{{ labels.system_label }}</span>
                     <span id="recentcaret" class="fa fa-caret-down caret-down"></span>
                 </a>
-                <ul id="recentmenulist" class="dropdown-menu" aria-labelledby="navbarDropdown">	
-                </ul>
+                <RecentMenu ref="recentMenu" />
             </li>						
         </ul>				
     </div>
@@ -42,7 +41,7 @@
             <li id="avatarmenuitem" class="nav-item avatar-menu-item">
                 <a href="javascript:void(0)" id="avatarmenuitemlink" class="nav-link dropdown-toggle avatar-item" data-toggle="dropdown" data-target="#usermenuitem"><img id="avatarimage" width="50" height="50" class="img-avatar img-circle rounded-circle"/></a>
             </li>                
-            <li id="languagemenuitem" class="nav-item dropdown user-dropdown">
+            <li id="languagemenuitem" class="nav-item dropdown user-dropdown" v-show="languageVisible">
                 <a href="javascript:void(0)" id="languagemenuitemlink" class="nav-link dropdown-item dropdown-toggle" data-toggle="dropdown">	
                     <img id="languageimage" alt="Language" title="Language" class="img-lang" :class="'img-lang-'+accessor.lang" />
                     <strong class="fa fa-caret-down caret-down"></strong>
@@ -56,15 +55,19 @@
         </ul>
     </div>
 </nav>
+<SiderBar ref="siderBar" :visible="visible" :labels="labels" />
 </template>
 <script>
 import $ from "jquery";
+import { ref } from 'vue';
+import SiderBar from "./SiderBar.vue";
 import FavorMenu from "./FavorMenu.vue";
+import RecentMenu from "./RecentMenu.vue";
 import { setDefaultLanguage } from "@/assets/js/appinfo";
 import { accessor } from "@/assets/js/accessor.js";
 
 export default {
-    components: { FavorMenu },
+  components: { SiderBar, FavorMenu, RecentMenu },    
   props: {
     labels: Object,    
     visible: {
@@ -74,7 +77,8 @@ export default {
   },
   emits: ["language-changed","menu-selected"],
   setup() {
-    return { accessor };
+    const languageVisible = ref(true);
+    return { accessor, languageVisible };
   },
   computed: {
     accessorFullName() { return this.accessor.info?.name && this.accessor.info?.surname ? this.accessor.info?.name+" "+this.accessor.info?.surname : ""; },
@@ -84,14 +88,17 @@ export default {
     reset() {
         console.log("HeaderVar.vue: reset ...");
         this.$refs.favorMenu.reset();
+        this.$refs.siderBar.reset();
     },
-    menuSelected(action) {
-        this.$emit("menu-selected", action);
+    menuSelected(menu) {
+        if("menu"==menu) { this.$refs.siderBar.displaySideBarMenu(); }
+        this.$emit("menu-selected", menu);
 	},
     changeLanguage(lang) {
         console.log("change language: ",lang);
         setDefaultLanguage(lang);
         this.accessor.lang = lang;
+        this.$refs.siderBar.changeLanguage(lang);
         this.$emit('language-changed', lang);
     },
     setting() {
@@ -101,7 +108,11 @@ export default {
             $("#avatarimage").attr("src",avatar);
         }
         this.$refs.favorMenu.setting();
+        this.$refs.siderBar.setting();
+        this.$refs.siderBar.show();
     },
+    showLanguage() { this.languageVisible = true; },
+    hideLanguage() { this.languageVisible = false; },
   },
 };
 </script>

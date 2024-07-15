@@ -1,5 +1,5 @@
 <template>
-            <li id="favormenuitem" class="nav-item dropdown user-dropdown">
+            <li id="favormenuitem" class="nav-item dropdown user-dropdown" v-show="visible">
                 <a href="javascript:void(0)" id="favormenuitemlink" class="nav-link dropdown-item dropdown-toggle" role="button" data-toggle="dropdown" title="My Favorite">
                     <em class="fa fa-th"></em>
                 </a>
@@ -8,13 +8,13 @@
                         <div id="favornewitemlayer" class="favor-menu-icon" v-show="newFavorVisible">
                             <a href="javascript:void(0)" @click.stop="cancelNewFavorClick" id="favorcancelitem" class="favor-cancel-item" title="Close New Favorite"><em class="fa fa-times-circle"></em></a>
                             <select id="favorprogitem" v-model="favorProg" @click.stop>
-                                <option v-for="(item, index) in favorItems.proglists" :key="index" :value="item.programid">{{getDisplayProgramName(item)}}</option>
+                                <option v-for="(item, index) in favorite.proglists" :key="index" :value="item.programid">{{getDisplayProgramName(item)}}</option>
                             </select>
                             <a href="javascript:void(0)" @click.stop="addFavorItemClick" id="favornewitem" class="favor-new-item fa fa-plus" title="Add New Favorite"></a>
                         </div>
                         <div id="favorbarmenu" class="navbox-tiles">
-                            <template v-for="(item,index) in favorItems.favorlists" :key="index">
-                                <a v-if="item.type=='new'" href="javascript:void(0)" @click.stop="newFavorItemClick(item)" class="tile fa-box-title fav-blank" title="New Favorite" :seqno="getFavorSeqno(item,index+1)"><div class="icon"><img class="fa fa-app-image" :src="getDefaultFavorIcon()" alt=""/></div><span class="title">Add New</span></a>
+                            <template v-for="(item,index) in favorite.favorlists" :key="index">
+                                <a v-if="item.type == 'new'" href="javascript:void(0)" @click.stop="newFavorItemClick(item)" class="tile fa-box-title fav-blank" title="New Favorite" :seqno="getFavorSeqno(item,index+1)"><div class="icon"><img class="fa fa-app-image" :src="getDefaultFavorIcon()" alt=""/></div><span class="title">Add New</span></a>
                                 <a v-else href="javascript:void(0)" @click="openFavorItemClick(item)" class="tile fa-box-title fav-app" :seqno="getFavorSeqno(item,index+1)" :pid="item.programid" :url="item.url" :title="item.programid">
                                     <div class="icon"><img class="fa fa-app-image" :src="getFavorIcon(item)" alt=""/></div><span class="title">{{ getDisplayFavorName(item) }}</span>
                                     <ul class="todo"><li @click.stop="deleteFavorItemClick(item,index+1)"><img class='img-delete-icon' title="Delete" width="25px" height="25px"/></li></ul>
@@ -36,10 +36,9 @@ import { ref } from 'vue';
 import { getApiUrl, getImgUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo";
 import { submitFailure } from "@/assets/js/apputil";
 import { getAccessorToken } from "@/assets/js/messenger";
-import { openPage } from "@/assets/js/menuutil";
+import { openPage } from "@/assets/js/loginutil";
 import { accessor } from "@/assets/js/accessor.js";
-
-const favorData = {proglists: [], favorlists: []};
+import { favorite } from "@/assets/js/favorite.js";
 
 export default {
   props: {
@@ -49,16 +48,15 @@ export default {
     },
   },
   setup() {
-    const favorItems = ref(favorData);
     const newFavorVisible = ref(false);
     const favorProg = ref(null);
     const currentFavor = ref(null);
-    return { accessor, favorItems, newFavorVisible, favorProg, currentFavor };
+    return { accessor, favorite, newFavorVisible, favorProg, currentFavor };
   },
   methods: {
     reset() {
         console.log("FavorMenu.vue: reset ...");
-        this.favorItems = {...favorData};
+        this.favorite.reset();
     },
     getFavorIcon(item) {
         return item.iconfile && item.iconfile.trim().length > 0 ? getImgUrl()+"/img/apps/"+item.iconfile : this.getDefaultFavorIcon();
@@ -103,7 +101,7 @@ export default {
                         for(let idx = rows.length + 1; idx <= 9; idx++) {
                             rows.push({type:"new", seqno: idx});
                         }
-                        this.favorItems.favorlists = rows;
+                        this.favorite.setFavorLists(rows);
                     }
                 }
             }
@@ -123,7 +121,7 @@ export default {
             contentType: DEFAULT_CONTENT_TYPE,
             success: (data,status,transport) => { 
                 console.log("loadProgramItems: success",transport.responseText);                
-                this.favorItems.proglists = data.body.rows;
+                this.favorite.setProgLists(data.body.rows);
             },
         });	
     },
@@ -134,7 +132,7 @@ export default {
         console.log("addFavorItem: current favor",this.currentFavor);
         console.log("addFavorItem: favor prog",this.favorProg);
         if(this.currentFavor && this.favorProg) {
-            let prog = this.favorItems.proglists.find((item) => item.programid == this.favorProg);
+            let prog = this.favorite.proglists.find((item) => item.programid == this.favorProg);
             console.log("addFavorItem: prog item",prog);
             if(!prog) return;
             let fs_user = this.accessor.info?.userid;
@@ -166,7 +164,7 @@ export default {
     },
     openFavorItemClick(item) {
         console.log("openFavorItem: item",item);
-        openPage(item.programid,item.url);
+        openPage(item,this.accessor,this.favorite);
     },
     deleteFavorItemClick(item,index) {
         console.log("deleteFavorItem: item",item);

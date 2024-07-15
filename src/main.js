@@ -5,6 +5,7 @@ import "jquery-ui-dist/jquery-ui.css";
 import "bootstrap";
 import "bootbox";
 import "./assets/css/font-awesome.css";
+import "./assets/css/animations.css";
 import "./assets/css/component.css";
 import "./assets/css/base_style.css";
 import "./assets/css/nav_menu.css";
