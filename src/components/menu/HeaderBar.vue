@@ -51,7 +51,7 @@
                     <li><a href="javascript:void(0)" class="dropdown-item" id="linklangth"  @click="changeLanguage('TH')"><img class="img-lang img-lang-TH" title="Thai"/><span id="thailanguage" class="lang-word">{{ labels.thai_lang }}</span></a></li>
                 </ul>
             </li>
-            <FavorMenu ref="favorMenu" />
+            <FavorMenu ref="favorMenu" :visible="favorVisible" />
         </ul>
     </div>
 </nav>
@@ -78,7 +78,8 @@ export default {
   emits: ["language-changed","menu-selected"],
   setup() {
     const languageVisible = ref(true);
-    return { accessor, languageVisible };
+    const favorVisible = ref(true);
+    return { accessor, languageVisible, favorVisible };
   },
   computed: {
     accessorFullName() { return this.accessor.info?.name && this.accessor.info?.surname ? this.accessor.info?.name+" "+this.accessor.info?.surname : ""; },
@@ -113,6 +114,8 @@ export default {
     },
     showLanguage() { this.languageVisible = true; },
     hideLanguage() { this.languageVisible = false; },
+    showFavorite() { this.favorVisible = true; },
+    hideFavorite() { this.favorVisible = false; },
   },
 };
 </script>
