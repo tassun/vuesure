@@ -72,9 +72,9 @@ export default {
       this.searchingVisible = false;
       this.menuFlip = true;
     },
-    setting() {
+    setting(callback) {
       console.log("SideBar: setting",this.accessor);
-      this.loadSideBarMenu();
+      this.loadSideBarMenu(callback);
     },
     show() {
       this.searchingVisible = false;
@@ -89,6 +89,7 @@ export default {
         label : lang=="EN"?item.progname:item.prognameth, element : item
       }});
       $("#sidemenusearchtext").autocomplete("option","source",jsAry);
+      return jsAry;
     },
     initMenuItems(dataset) {
       if(!dataset) return;
@@ -110,7 +111,7 @@ export default {
       console.log("SiderBar.vue: item-menu-selected",item);
       openPage(item,this.accessor,this.favorite);
     },
-    loadSideBarMenu() {
+    loadSideBarMenu(callback) {
       console.log("loadSideBarMenu: accessor",this.accessor);
       let access_user = this.accessor.info?.userid;
       if(!access_user || access_user.trim().length==0) return;
@@ -127,7 +128,8 @@ export default {
           console.log("loadSideBarMenu: success",data);
           if(data.body.dataset) {
             this.initMenuItems(data.body.dataset);            
-            this.initSearching(language);
+            let jsAry = this.initSearching(language);
+            if(callback) callback(jsAry);
           }
         },
       });

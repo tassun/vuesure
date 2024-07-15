@@ -102,14 +102,14 @@ export default {
         this.$refs.siderBar.changeLanguage(lang);
         this.$emit('language-changed', lang);
     },
-    setting() {
+    setting(callback) {
         console.log("HeaderBar: setting, accessor",this.accessor);
         let avatar = this.accessor.info?.avatar;
         if(avatar && avatar.trim().length > 0) {
             $("#avatarimage").attr("src",avatar);
         }
         this.$refs.favorMenu.setting();
-        this.$refs.siderBar.setting();
+        this.$refs.siderBar.setting(callback);
         this.$refs.siderBar.show();
     },
     showLanguage() { this.languageVisible = true; },

@@ -12,9 +12,10 @@ import { getLabelModel } from "./assets/js/labelutil.js";
 import HeaderBar from "./components/menu/HeaderBar.vue";
 import LoginForm from "./components/form/LoginForm.vue";
 import WorkerFrame from "./components/WorkerFrame.vue";
-import { refreshScreen, logOut, validAccessToken, verifyAfterLogin } from "./assets/js/loginutil.js";
+import { refreshScreen, logOut, validAccessToken, verifyAfterLogin, openPage } from "./assets/js/loginutil.js";
 import { removeAccessorInfo } from "./assets/js/messenger.js";
 import { accessor } from "./assets/js/accessor.js";
+import { favorite } from "@/assets/js/favorite.js";
 
 export default {
   components: {
@@ -25,7 +26,7 @@ export default {
     let loginVisible = ref(false);
     let menuVisible = ref(false);
     let workingVisible = ref(false);
-    return { labels, accessor, loginVisible, menuVisible, workingVisible };
+    return { labels, accessor, favorite, loginVisible, menuVisible, workingVisible };
   },
   mounted() {
     console.log("App: on mounted ...");
@@ -55,7 +56,7 @@ export default {
       this.accessor.setInfo(info);
       this.loginVisible = false;
       this.menuVisible = true;
-      this.$refs.headerBar.setting();
+      this.$refs.headerBar.setting((menulists) => { this.openFistPage(menulists); });
       this.$refs.workerFrame.setting();
       refreshScreen();
     },
@@ -79,6 +80,16 @@ export default {
       this.loginVisible = true;
       this.menuVisible = false;
       this.accessor.reset();
+    },
+    openFistPage(menulists) {
+      let page = this.accessor.info?.firstpage || "worklist";
+      console.log("openFirstPage:",page);
+      if(menulists && (page && page.trim().length > 0)) {
+        let prog = menulists.find((item) => item.element.programid == page );
+        if(prog) {
+          openPage(prog.element,this.accessor,this.favorite);
+        }
+      }
     },
   }
 };

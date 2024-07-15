@@ -9,7 +9,6 @@ export function openPage(app,accessor,favorite) {
 const except_apps = ["page_profile","page_change","page_first","page_login","page_work","page_forgot","factor"];
 export function openProgram(app,accessor,favorite) {
 	console.log("openProgram:",app);
-	console.log("openProgram: accessor",accessor);
 	let fs_newwindows = "1" == accessor?.info?.newflag;
 	let appid = app.programid;
 	let url = app.url;
@@ -48,8 +47,6 @@ export function openProgram(app,accessor,favorite) {
 	recentApplication(app,favorite);
 }
 function recentApplication(app,favorite) {
-	console.log("recentApplication:",app);
-	console.log("favorite",favorite);
 	if(!favorite) return;
 	let appid = app.programid;
 	if(favorite.recentlists.length > 12) return;
