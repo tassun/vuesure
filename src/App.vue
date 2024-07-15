@@ -32,7 +32,7 @@ export default {
     this.$nextTick(() => {
       startApplication("index");
 			validAccessToken((valid,json) => {
-				console.log("valid = "+valid+", json : "+json);
+				console.log("valid :",valid,", json :",json);
 				if(!valid) {
 					removeAccessorInfo();
           this.loginVisible = true;

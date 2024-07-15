@@ -52,7 +52,7 @@ function recentApplication(app,favorite) {
 	console.log("favorite",favorite);
 	if(!favorite) return;
 	let appid = app.programid;
-	if(favorite.recentlists.length > 15) return;
+	if(favorite.recentlists.length > 12) return;
 	if(except_apps.some((item) => item.programid == appid )) return;
 	if(favorite.recentlists.some((item) => item.programid == appid )) return;
 	favorite.recentlists.push({...app});
