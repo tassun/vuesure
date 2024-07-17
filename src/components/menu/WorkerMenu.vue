@@ -10,6 +10,7 @@
       </div>
 </template>
 <script>
+import { onActivated } from 'vue';
 import { getImgUrl } from "@/assets/js/appinfo.js";
 import { openPage } from "@/assets/js/loginutil.js";
 import { accessor } from "@/assets/js/accessor.js";
@@ -26,8 +27,12 @@ export default {
       default: true,
     },
   },
-  setup() {
-    return { accessor, favorite };
+  setup(props,context) {
+    const onactivated = onActivated(() => {
+      console.log("WorkerMenu.vue: onActivated ... ");
+      context.emit("activated","menu");
+    });
+    return { accessor, favorite, onactivated };
   },
   mounted() {
     console.log("WorkerMenu.vue mounted ...");

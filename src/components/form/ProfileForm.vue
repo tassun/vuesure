@@ -100,7 +100,7 @@
 </style>
 <script>
 import $ from "jquery";
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onActivated } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers, email } from '@vuelidate/validators';
 import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/appinfo.js';
@@ -128,7 +128,11 @@ export default {
     },
   },
   emits: ["success"],
-  setup(props) {
+  setup(props,context) {
+    const onactivated = onActivated(() => {
+      console.log("ProfileForm.vue: onActivated ... ");
+      context.emit("activated","profile");
+    });
     const localInfo = ref({});
     const localData = ref({...formData});
     const infoVisible = ref(true);
@@ -153,7 +157,7 @@ export default {
       } 
     });
     const v$ = useVuelidate(validateRules, localData, { $lazy: true, $autoDirty: true });
-    return { accessor, v$, localInfo, localData, reqalert, emailalert, infoVisible, notfoundVisible, langlists };
+    return { accessor, v$, localInfo, localData, reqalert, emailalert, infoVisible, notfoundVisible, langlists, onactivated };
   },
   created() {
     watch(this.$props, (newProps) => {      
@@ -183,6 +187,11 @@ export default {
     },
     success() {
       this.$emit('success', this.localInfo);
+    },
+    activated() {
+      //this method active when this component was bling up
+      console.log("ProfileForm.vue: activated ...");
+      this.display();
     },
     async validateForm(focusing=true) {
       const valid = await this.v$.$validate();
