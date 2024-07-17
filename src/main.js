@@ -11,6 +11,7 @@ import "./assets/css/base_style.css";
 import "./assets/css/nav_menu.css";
 import "./assets/css/sidebar_menu.css";
 import "./assets/css/favor_menu.css";
+import "./assets/css/program_style.css";
 import "./assets/css/user_style.css";
 import "./assets/css/page_login.css";
 import "./assets/css/page_first.css";

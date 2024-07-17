@@ -10,7 +10,18 @@
 			{"name": "signin_label", "value": "เข้าสู่ระบบ"},
 			{"name": "profile_label", "value": "ข้อมูลส่วนตัว"},
 			{"name": "changepwd_label", "value": "เปลี่ยนรหัสผ่าน"},
-			{"name": "logout_label", "value": "ออกจากระบบ"}
+			{"name": "logout_label", "value": "ออกจากระบบ"},
+			{"name": "profile_caption", "value": "ข้อมูลส่วนตัว"},
+			{"name": "profilenotfound_label", "value": "ไม่พบข้อมูลผู้ใช้งาน"},
+			{"name": "usertname_label", "value": "ชื่อ(ไทย)"},
+			{"name": "usertsurname_label", "value": "นามสกุล(ไทย)"},
+			{"name": "userename_label", "value": "ชื่อ(อังกฤษ)"},
+			{"name": "useresurname_label", "value": "นามสกุล(อังกฤษ)"},
+			{"name": "displayname_label", "value": "ชื่อที่ใช้แสดง"},
+			{"name": "email_label", "value": "อีเมล"},
+			{"name": "mobile_label", "value": "โทรศัพท์"},
+			{"name": "lineid_label", "value": "ไอดีไลน์"},
+			{"name": "langcode_label", "value": "แสดงภาษา"}
 		]
 	},
 	{
@@ -24,7 +35,18 @@
 			{"name": "signin_label", "value": "Sign In"},
 			{"name": "profile_label", "value": "Profile"},
 			{"name": "changepwd_label", "value": "Change Password"},
-			{"name": "logout_label", "value": "Log Out"}
+			{"name": "logout_label", "value": "Log Out"},
+			{"name": "profile_caption", "value": "User Information"},
+			{"name": "profilenotfound_label", "value": "Profile not found"},
+			{"name": "usertname_label", "value": "First Name(Thai)"},
+			{"name": "usertsurname_label", "value": "Last Name(Thai)"},
+			{"name": "userename_label", "value": "First Name(English)"},
+			{"name": "useresurname_label", "value": "Last Name(English)"},
+			{"name": "displayname_label", "value": "Display Name"},
+			{"name": "email_label", "value": "Email"},
+			{"name": "mobile_label", "value": "Mobile"},
+			{"name": "lineid_label", "value": "Line ID"},
+			{"name": "langcode_label", "value": "Display Language"}
 		]
 	}
 ]

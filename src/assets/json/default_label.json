@@ -39,7 +39,8 @@
 			{"name": "record_notfound", "value": "ไม่พบรายการ"},
 			{"name": "trx_notfound", "value": "ไม่พบรายการ"},
 			{"name": "invalid_alert", "value": "กรอกข้อมูลไม่ถูกต้อง"},
-			{"name": "empty_alert", "value": "กรุณากรอกข้อมูล"}
+			{"name": "empty_alert", "value": "กรุณากรอกข้อมูล"},
+			{"name": "email_alert", "value": "อีเมลไม่ถูกต้อง"}
 		]
 	},
 	{
@@ -82,7 +83,8 @@
 			{"name": "record_notfound", "value": "Record not found"},
 			{"name": "trx_notfound", "value": "Transaction not found"},
 			{"name": "invalid_alert", "value": "Invalid input"},
-			{"name": "empty_alert", "value": "This cannot be empty"}
+			{"name": "empty_alert", "value": "This cannot be empty"},
+			{"name": "email_alert", "value": "Invalid email address"}
 		]
 	}
 ]

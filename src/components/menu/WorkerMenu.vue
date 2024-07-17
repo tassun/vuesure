@@ -1,5 +1,5 @@
 <template>
-      <div id="page_first" class="pt-page" :class="visible ? 'pt-page-current pt-page-moveFromRight' : 'pt-page-current pt-page-moveToRightFade'">
+      <div id="page_first" class="pt-page" :class="visible ? 'pt-page-current pt-page-moveFromRight' : 'pt-page-moveToRightFade'">
         <div id="page_first_sub" class="panel-body pt-page-body" align="center">
           <div class="favor-navbox-tiles">
             <template v-for="(item,index) in favorite.favorlists" :key="index">
@@ -10,8 +10,8 @@
       </div>
 </template>
 <script>
-import { getImgUrl } from "@/assets/js/appinfo";
-import { openPage } from "@/assets/js/loginutil";
+import { getImgUrl } from "@/assets/js/appinfo.js";
+import { openPage } from "@/assets/js/loginutil.js";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";
 
@@ -28,6 +28,9 @@ export default {
   },
   setup() {
     return { accessor, favorite };
+  },
+  mounted() {
+    console.log("WorkerMenu.vue mounted ...");
   },
   methods: {
     getAppIcon(item) {

@@ -125,7 +125,7 @@ label:active + textarea {
  font-weight: normal; 
  color: #FFFFFF;
 }
-
+button.btn-dark:hover {  box-shadow: 2px 2px 2px gray; }
 .btn-primary {
 	color: #FFFFFF;
 	border: 1px solid #028575;
@@ -224,7 +224,7 @@ a.alink-data { color: black; cursor: pointer; }
 }
 .filter-layer { margin-right:3px; }
 .entry-layer { 
-	margin-left: 15px; margin-right: 15px; margin-top: 15px; margin-bottom: 15px;
+	margin-top: 5px; margin-bottom: 5px;
 }
 .sub-entry-layer { margin-left: 0px; margin-right:3px; padding-top: 5px; }
 .panel-body { padding-top: 1px; }
@@ -234,7 +234,7 @@ div.col-label { text-align: left; padding-top: 10px; }
 		text-align: right;
 	}
 }
-.pt-page-controller { width: 99.8%; }
+.pt-page-controller { width: 99%; }
 
 /* record set - input dialog */
 .recordset-detail-class { margin-left: 15px; }
@@ -369,6 +369,7 @@ a:hover { text-decoration: none; }
 .btn-cover-layer { margin-right: 10px; }
 #fswaitlayer { display:none; position:absolute; left:1px; top:1px; z-Index:9999; font-size: 50px; color: #1E90FF; }
 .btn-ctrl { margin-top: 10px; margin-right: 10px; min-width: 100px; }
+.btn-ctrl-cover { padding-right: 30px; padding-bottom: 15px; }
 .btn-span { padding-left: 5px; }
 .img-lang { width: 30px; height: 15px; }
 .img-lang-EN { content: url(../img/lang/EN.png); }

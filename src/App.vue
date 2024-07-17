@@ -2,8 +2,8 @@
 <template>
   <div id="fswaitlayer" class="fa fa-spinner fa-spin"></div>
   <HeaderBar ref="headerBar" :visible="menuVisible" :labels="labels" @language-changed="changeLanguage" @menu-selected="menuSelected"/>
-	<LoginForm ref="loginForm" version="v1.0.0" :labels="labels" @success="loginSuccess" :visible="loginVisible" />
-  <WorkerFrame ref="workerFrame" :visible="workingVisible" />
+	<LoginForm ref="loginForm" :visible="loginVisible" :labels="labels" version="v1.0.0" @success="loginSuccess" />
+  <WorkerFrame ref="workerFrame" :visible="workingVisible" :labels="labels" />
 </template>
 <script>
 import { ref } from 'vue';
@@ -53,7 +53,10 @@ export default {
     },
     loginSuccess(info) {
       console.log("login success: info",info);
-      this.accessor.setInfo(info);
+      this.accessor.setInfo(info);      
+      if(this.accessor.info?.langcode && this.accessor.info?.langcode.trim().length > 0) {
+        this.$refs.headerBar.changeLanguage(this.accessor.info?.langcode);
+      }
       this.loginVisible = false;
       this.menuVisible = true;
       this.$refs.headerBar.setting((menulists) => { this.openFistPage(menulists); });
@@ -65,6 +68,7 @@ export default {
       if("logout"==menu) { this.goLogOut(); }
       else if("home"==menu) { this.goHome(); }
       else if("intro"==menu) { this.$refs.workerFrame.hideWorkerMenu(); }
+      else if("profile"==menu) { this.$refs.workerFrame.showProfile(); }
     },
     goHome() {
       this.workingVisible = false;

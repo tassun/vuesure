@@ -14,9 +14,9 @@
 <script>
 import $ from "jquery";
 import { ref } from 'vue';
-import { getApiUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo";
-import { getAccessorToken } from "@/assets/js/messenger";
-import { openPage } from "@/assets/js/loginutil";
+import { getApiUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo.js";
+import { getAccessorToken } from "@/assets/js/messenger.js";
+import { openPage } from "@/assets/js/loginutil.js";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";
 import SiderMenu from "./SiderMenu.vue";

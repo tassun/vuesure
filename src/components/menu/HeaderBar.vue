@@ -63,7 +63,7 @@ import { ref } from 'vue';
 import SiderBar from "./SiderBar.vue";
 import FavorMenu from "./FavorMenu.vue";
 import RecentMenu from "./RecentMenu.vue";
-import { setDefaultLanguage } from "@/assets/js/appinfo";
+import { setDefaultLanguage } from "@/assets/js/appinfo.js";
 import { accessor } from "@/assets/js/accessor.js";
 
 export default {
@@ -82,7 +82,11 @@ export default {
     return { accessor, languageVisible, favorVisible };
   },
   computed: {
-    accessorFullName() { return this.accessor.info?.name && this.accessor.info?.surname ? this.accessor.info?.name+" "+this.accessor.info?.surname : ""; },
+    accessorFullName() { 
+        if(this.accessor.info?.displayname && this.accessor.info?.displayname.trim().length > 0) return this.accessor.info?.displayname;
+        if(this.accessor.info?.name && this.accessor.info?.surname) return this.accessor.info?.name+" "+this.accessor.info?.surname;
+        return this.accessor.info?.username ? this.accessor.info?.username : ""; 
+    },
     lastAccessTime() { return this.accessor.info?.accessdate && this.accessor.info?.accesstime ? this.accessor.info?.accessdate+" "+this.accessor.info?.accesstime : ""; },
   },
   methods: {
