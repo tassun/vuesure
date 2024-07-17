@@ -105,7 +105,6 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, helpers, email } from '@vuelidate/validators';
 import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/appinfo.js';
 import { startWaiting, stopWaiting, parseErrorThrown, alertbox, serializeParameters, confirmUpdate, successbox }  from '@/assets/js/apputil.js';
-import { getAccessorToken } from "@/assets/js/messenger.js";
 import { accessor } from "@/assets/js/accessor.js";
 
 const formData = {
@@ -177,7 +176,7 @@ export default {
     },
     setting() {
         console.log("ProfileForm.vue: setting ...");
-        this.loagLanguages();
+        this.loadLanguages();
     },
     focus() {
       this.$refs.main_username.focus();
@@ -205,18 +204,19 @@ export default {
         else $("#"+input).trigger("focus");
       }
     },
-    loagLanguages() {
-        console.log("ProfileForm.vue loagLanguages ...");
-        let authtoken = getAccessorToken();
+    loadLanguages() {
+        console.log("ProfileForm.vue loadLanguages ...");
+        let params = { names: "tklanguage" };
+        let formdata = serializeParameters({ajax: true},params,true);
         $.ajax({
             url: getApiUrl()+"/api/category/lists",
+            data: formdata.jsondata,
+            headers : formdata.headers,
             type: "POST",
-            data: { names: "tklanguage" },
-            headers : { "authtoken": authtoken },
             dataType: "json",
             contentType: DEFAULT_CONTENT_TYPE,
             success: (data,status,transport) => { 
-                console.log("loagLanguages: success",transport.responseText);                
+                console.log("loadLanguages: success",transport.responseText);                
                 if(data.body && data.body.length > 0) {
                   let ds = data.body[0];
                   if(ds.resultset.rows) {
@@ -282,13 +282,16 @@ export default {
         if(this.accessor.info?.userid) {
             //try to get profile info
             let params = {userid: this.accessor.info?.userid};
+            let jsondata = {ajax: true};
+            let formdata = serializeParameters(jsondata,params);
             startWaiting();
             $.ajax({
               url: getApiUrl()+"/api/profile/get",
+              data: formdata.jsondata,
+              headers : formdata.headers,
               type: "POST",
-              contentType: DEFAULT_CONTENT_TYPE,
-              data: params, 
               dataType: "json",
+              contentType: DEFAULT_CONTENT_TYPE,
               error : function(transport,status,errorThrown) { 
                 stopWaiting();
                 errorThrown = parseErrorThrown(transport, status, errorThrown);
