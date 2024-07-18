@@ -120,6 +120,8 @@ export default {
     hideLanguage() { this.languageVisible = false; },
     showFavorite() { this.favorVisible = true; },
     hideFavorite() { this.favorVisible = false; },
+    displaySideBar() { this.$refs.siderBar.displaySideBarMenu(); },    
+    collapseSideBar() { this.$refs.siderBar.collapseSideBarMenu(); },
   },
 };
 </script>

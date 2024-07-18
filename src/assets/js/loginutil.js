@@ -3,11 +3,11 @@ import { startWaiting, openNewWindow, submitWindow }  from '@/assets/js/apputil.
 import { getApiUrl, getBaseUrl, getDefaultLanguage,  DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo";
 import { getAccessorToken, removeAccessorInfo, getAccessorInfo, saveAccessorInfo, getStorage, removeStorage, setupDiffie } from "@/assets/js/messenger";
 
-export function openPage(app,accessor,favorite) {
-	openProgram(app,accessor,favorite);
+export function openPage(app,accessor,favorite,callback) {
+	openProgram(app,accessor,favorite,callback);
 }
 const except_apps = ["page_profile","page_change","page_first","page_login","page_work","page_forgot","factor"];
-export function openProgram(app,accessor,favorite) {
+export function openProgram(app,accessor,favorite,callback) {
 	console.log("openProgram:",app);
 	let fs_newwindows = "1" == accessor?.info?.newflag;
 	let appid = app.programid;
@@ -49,6 +49,7 @@ export function openProgram(app,accessor,favorite) {
 		startWaiting();
 	}
 	recentApplication(app,favorite);
+	if(callback) callback();
 }
 function recentApplication(app,favorite) {
 	if(!favorite) return;

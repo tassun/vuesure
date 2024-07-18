@@ -95,6 +95,9 @@ export default {
         }
       }
     },
+    hideMenu() {
+      this.$refs.headerBar.collapseSideBar();
+    },
   }
 };
 </script>

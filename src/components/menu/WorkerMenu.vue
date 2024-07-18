@@ -49,6 +49,7 @@ export default {
     },
     openAppClick(item) {
       openPage(item,this.accessor,this.favorite);
+      this.$root.hideMeu();
     },
   },
 };

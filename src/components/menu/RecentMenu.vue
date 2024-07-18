@@ -1,7 +1,7 @@
 <template>
     <ul id="recentmenulist" class="dropdown-menu" aria-labelledby="navbarDropdown">
         <li v-for="(item,index) in favorite.recentlists" :key="index">
-            <a href='javascript:void(0)' @click.stop="openAppClick(item)" class="dropdown-item">{{ getDisplayRecentName(item) }}</a>
+            <a href='javascript:void(0)' @click="openAppClick(item)" class="dropdown-item">{{ getDisplayRecentName(item) }}</a>
         </li>
     </ul>
 </template>
@@ -20,6 +20,7 @@ export default {
     },
     openAppClick(item) {
       openPage(item,this.accessor,this.favorite);
+      this.$root.hideMeu();
     },
   },
 };

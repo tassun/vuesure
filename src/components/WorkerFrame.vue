@@ -12,7 +12,7 @@
 import $ from "jquery";
 import { ref } from 'vue';
 import { stopWaiting }  from '@/assets/js/apputil.js';
-import { refreshScreen } from "@/assets/js/loginutil.js";
+import { refreshScreen, hideWorkSpace } from "@/assets/js/loginutil.js";
 import { accessor } from "@/assets/js/accessor.js";
 import WorkerMenu from "./menu/WorkerMenu.vue";
 import ProfileForm from "./form/ProfileForm.vue";
@@ -50,7 +50,7 @@ export default {
       console.log("WorkerFrame.vue: reset ...");
       this.componentVisible = false;
       this.workingVisible = false;
-      $("#workingframe").hide();
+      hideWorkSpace();
     },
     setting() {
       this.showWorkerMenu();
@@ -60,7 +60,7 @@ export default {
       this.componentVisible = true;
       this.workingVisible = false;
       this.currentComponent = "WorkerMenu";
-      $("#workingframe").hide();
+      hideWorkSpace();
     },
     hideWorkerMenu() {
       this.componentVisible = false;
@@ -69,17 +69,18 @@ export default {
       this.workingVisible = true;
       this.componentVisible = false;
       $("#pagecontainer").hide();
+      $("#workingframe").show();
     },
     hideWorking() {
       this.workingVisible = false;
+      hideWorkSpace();
     },
     showProfile() {
       $("#pagecontainer").show();
       this.workingVisible = false;
       this.componentVisible = true;
       this.currentComponent = "ProfileForm";
-      //this.$refs.profileForm.display();
-      console.log("viewComponent",this.$refs.viewComponent);
+      hideWorkSpace();
     },
     componentActivated(name) {
       console.log("component activated: ",name);

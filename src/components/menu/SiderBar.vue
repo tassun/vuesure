@@ -7,7 +7,7 @@
       </div>
     </div>
     <div ref="sidebarlayer" id="sidebarlayer" class="sidebar-layer sidebar left">
-      <SiderMenu ref="siderMenu" :lang="accessor.lang" :menus="menuItems" @item-menu-selected="itemMenuSelected"/>
+      <SiderMenu ref="siderMenu" :lang="accessor.lang" :menus="menuItems" @item-menu-selected="itemMenuSelected" @group-menu-selected="groupMenuSelected"/>
     </div>
   </nav>
 </template>
@@ -110,6 +110,13 @@ export default {
     itemMenuSelected(item) {
       console.log("SiderBar.vue: item-menu-selected",item);
       openPage(item,this.accessor,this.favorite);
+      this.collapseSideBarMenu();
+    },
+    groupMenuSelected(group) {
+      console.log("SideBar.vue: grup-menu-selected",group);
+      if(this.menuFlip) {
+        this.displaySideBarMenu();
+      }
     },
     loadSideBarMenu(callback) {
       console.log("loadSideBarMenu: accessor",this.accessor);

@@ -1,7 +1,7 @@
 <template>
 <ul id="menuitemlist" class="nav flex-column sidebar-nav navbar-nav list-sidebar bg-default" role="menu">
     <li class="dropdown" v-for="(value,key,counter) in menus.sidemap" :key="key">
-        <a class="nav-menu-group dropdown-toggle collapsed active" data-toggle="collapse" :data-target="'#submenu_'+counter" :href="'javascript:void(0);#submenu_'+counter">
+        <a @click="$emit('group-menu-selected', value)" class="nav-menu-group dropdown-toggle collapsed active" data-toggle="collapse" :data-target="'#submenu_'+counter" :href="'javascript:void(0);#submenu_'+counter">
             <em :class="getDisplayGroupStyle(value)"></em>&nbsp;
             <span class="nav-label">{{ getDisplayGroupName(value) }}</span>
             <span class="menu-group-icon fa fa-chevron-left pull-right"></span>
@@ -20,7 +20,7 @@ export default {
     menus: Object,    
     lang: String,
   },
-  emits: ["item-menu-selected"],
+  emits: ["group-menu-selected","item-menu-selected"],
   methods: {
     getDisplayGroupStyle(item) {
         return item.groupstyle && item.groupstyle.trim().length > 0 ? item.groupstyle : "fa fa-tasks";
