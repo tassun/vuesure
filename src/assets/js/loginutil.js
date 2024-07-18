@@ -14,9 +14,11 @@ export function openProgram(app,accessor,favorite) {
 	let url = app.url;
 	let params = app.parameters;
 	let apath = app.progpath;
-	let appurl = getBaseUrl() + "/gui/" + appid; 
+	let appurl = getBaseUrl() + "/gui/" + appid;
+	let html = false; 
 	if(apath && apath.trim().length >0) {
 		appurl = getBaseUrl() + apath;
+		html = apath.indexOf(".html");
 	}
 	if(url && url.trim().length > 0) {
 		//appurl = getBaseUrl()+"/load/"+appid; 
@@ -29,6 +31,7 @@ export function openProgram(app,accessor,favorite) {
 	let authtoken = getAccessorToken();
 	if(fs_newwindows) {
 		let awin = openNewWindow({
+			method: html?"GET":"POST",
 			url : appurl,
 			windowName: "fs_window_"+appid,
 			params: "authtoken="+authtoken+"&language="+getDefaultLanguage()+(params?"&"+params:"")
@@ -38,6 +41,7 @@ export function openProgram(app,accessor,favorite) {
 		$("#pagecontainer").hide();
 		$("#workingframe").show();
 		submitWindow({
+			method: html?"GET":"POST",
 			url : appurl,
 			windowName: "workingframe",
 			params: "authtoken="+authtoken+"&language="+getDefaultLanguage()+(params?"&"+params:"")

@@ -2,7 +2,7 @@
   <div id="fsworkinglayer" class="working-class working-control-class">
     <div ref="pagecontainer" id="pagecontainer" class="pt-pager">
       <keep-alive>
-        <component :is="currentComponent" :visible="componentVisible" :labels="labels" ref="viewComponent" @activated="componentActivated" />
+        <component :is="currentComponent" :visible="componentVisible" :labels="labels" ref="viewComponent" @activated="componentActivated" @success="updateSuccess"/>
       </keep-alive>
     </div> 
     <iframe id="workingframe" name="workingframe" width="100%" class="working-frame" title="Working" v-show="workingVisible"></iframe>
@@ -84,6 +84,12 @@ export default {
     componentActivated(name) {
       console.log("component activated: ",name);
       if("profile"==name) this.$refs.viewComponent.display();
+    },
+    updateSuccess(action,info) {
+      console.log("updateSuccess: action",action,", info",info);
+      if("profile"==action) {
+        this.showWorkerMenu();
+      }
     },
   },
 };

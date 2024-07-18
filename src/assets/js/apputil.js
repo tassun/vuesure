@@ -30,7 +30,8 @@ export function addWindow(awindow) {
 export function submitWindow(settings) {
 	let p = settings;
 	if((p.url && p.url!="") && p.params) {
-		let frm = $("<form method='POST'></form>");
+		let method = p.method || "POST";
+		let frm = $("<form method='"+method+"'></form>");
 		frm.attr("action",p.url);
 		frm.attr("target",p.windowName);
 		if(typeof(p.params)==="string") {
@@ -70,6 +71,7 @@ export function submitWindow(settings) {
 }		 
 export function openNewWindow(settings) {
 	let defaultSettings = {
+		method: "POST",
 		url : "",
 		windowName : "_blank",
 		windowWidth : window.screen.availWidth,

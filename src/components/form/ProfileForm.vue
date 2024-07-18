@@ -80,6 +80,7 @@
                         </div>
                         <div class="col-md-3 col-height">
                             <select ref="langcode" class="form-control input-md" v-model="localData.langcode">
+                              <option value=""></option>
                               <option v-for="item in langlists" :key="item.typeid" :value="item.typeid">{{ getDisplayLanguageName(item) }}</option>
                             </select>
                         </div>
@@ -133,7 +134,6 @@ export default {
       console.log("ProfileForm.vue: onActivated ... ");
       context.emit("activated","profile");
     });
-    const localInfo = ref({});
     const localData = ref({...formData});
     const infoVisible = ref(true);
     const notfoundVisible = ref(false);
@@ -157,7 +157,7 @@ export default {
       } 
     });
     const v$ = useVuelidate(validateRules, localData, { $lazy: true, $autoDirty: true });
-    return { accessor, v$, localInfo, localData, reqalert, emailalert, infoVisible, notfoundVisible, langlists, onactivated };
+    return { accessor, v$, localData, reqalert, emailalert, infoVisible, notfoundVisible, langlists, onactivated };
   },
   created() {
     watch(this.$props, (newProps) => {      
@@ -186,12 +186,7 @@ export default {
       this.$refs.main_username.focus();
     },
     success() {
-      this.$emit('success', this.localInfo);
-    },
-    activated() {
-      //this method active when this component was bling up
-      console.log("ProfileForm.vue: activated ...");
-      this.display();
+      this.$emit('success', "profile", this.localData);
     },
     async validateForm(focusing=true) {
       const valid = await this.v$.$validate();
