@@ -18,7 +18,7 @@ export function openProgram(app,accessor,favorite,callback) {
 	let html = false; 
 	if(apath && apath.trim().length >0) {
 		appurl = getBaseUrl() + apath;
-		html = apath.indexOf(".html");
+		html = apath.indexOf(".html") > 0;
 	}
 	if(url && url.trim().length > 0) {
 		//appurl = getBaseUrl()+"/load/"+appid; 

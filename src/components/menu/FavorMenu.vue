@@ -59,13 +59,13 @@ export default {
         this.favorite.reset();
     },
     getFavorIcon(item) {
-        return item.iconfile && item.iconfile.trim().length > 0 ? getImgUrl()+"/img/apps/"+item.iconfile : this.getDefaultFavorIcon();
+        return item.iconfile && item.iconfile.trim().length > 0 ? getImgUrl()+"/img/apps/"+item.iconfile : this.getDefaultFavorIcon(item);
     },
     getFavorSeqno(item,index) {
         return item.seqno ? item.seqno : index;
     },
-    getDefaultFavorIcon() {
-        return getImgUrl()+"/img/apps/favorite.png";
+    getDefaultFavorIcon(item) {
+        return item.type=='new' ? getImgUrl()+"/img/apps/favorite.png" : getImgUrl()+"/img/apps/application.png";
     },
     getDisplayFavorName(item) {
         return this.accessor.lang === 'EN' ? item.shortname : item.shortnameth;
