@@ -7,7 +7,7 @@
       </div>
     </div>
     <div ref="sidebarlayer" id="sidebarlayer" class="sidebar-layer sidebar left">
-      <SiderMenu ref="siderMenu" :lang="accessor.lang" :menus="menuItems" @item-menu-selected="itemMenuSelected" @group-menu-selected="groupMenuSelected"/>
+      <SiderMenu ref="siderMenu" :lang="accessor.lang" :menus="menuItems" @item-menu-selected="itemMenuSelected" @group-menu-selected="groupMenuSelected" />
     </div>
   </nav>
 </template>
@@ -15,7 +15,7 @@
 import $ from "jquery";
 import { ref } from 'vue';
 import { getApiUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo.js";
-import { getAccessorToken } from "@/assets/js/messenger.js";
+import { serializeParameters } from "@/assets/js/apputil.js";
 import { openPage } from "@/assets/js/loginutil.js";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";
@@ -123,17 +123,18 @@ export default {
       let access_user = this.accessor.info?.userid;
       if(!access_user || access_user.trim().length==0) return;
       let language = this.accessor.lang;
-      let authtoken = getAccessorToken();
+      let params = { userid: access_user, language: language };
+      let formdata = serializeParameters(params);
       $.ajax({
         url: getApiUrl()+"/api/menu/side",
-        data: { userid: access_user, language: language },
-        headers : { "authtoken": authtoken },
+        data: formdata.jsondata,
+        headers : formdata.headers,
         type: "POST",
         dataType: "json",
         contentType: DEFAULT_CONTENT_TYPE,
         success: (data) => { 
           console.log("loadSideBarMenu: success",data);
-          if(data.body.dataset) {
+          if(data.body?.dataset) {
             this.initMenuItems(data.body.dataset);            
             let jsAry = this.initSearching(language);
             if(callback) callback(jsAry);

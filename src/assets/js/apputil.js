@@ -360,7 +360,9 @@ export function serializeParameters(parameters, addonParameters, raw) {
 	console.log("serialize: parameters",parameters);
 	console.log("serialize: jsondata",jsondata);
 	let token = getAccessorToken();
-	return { cipherdata: cipherdata, jsondata: jsondata, headers : { "authtoken" : token, "data-type": cipherdata?"json/cipher":"", language: getDefaultLanguage() } };
+	let headers = { "authtoken" : token, "data-type": cipherdata?"json/cipher":"", language: getDefaultLanguage() };
+	console.log("serialize: headers",headers);
+	return { cipherdata: cipherdata, jsondata: jsondata, headers : headers };
 }
 export function decryptCipherData(headers, data) {
 	let accepttype = headers["accept-type"];

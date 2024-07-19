@@ -21,7 +21,14 @@
 			{"name": "email_label", "value": "อีเมล"},
 			{"name": "mobile_label", "value": "โทรศัพท์"},
 			{"name": "lineid_label", "value": "ไอดีไลน์"},
-			{"name": "langcode_label", "value": "แสดงภาษา"}
+			{"name": "langcode_label", "value": "แสดงภาษา"},
+			{"name": "changepassword_caption", "value": "เปลี่ยนรหัสผ่าน"},
+			{"name": "oldpassword_label", "value": "รหัสผ่านเก่า"},
+			{"name": "userpassword_label", "value": "รหัสผ่านใหม่"},
+			{"name": "confirmpassword_label", "value": "ยืนยันรหัสผ่าน"},
+			{"name": "matchpassword_alert", "value": "รหัสผ่านใหม่กับยืนยันรหัสผ่านไม่ตรงกัน"},
+			{"name": "passwordforce_label", "value": "ระบบบังคับให้ท่านต้องทำการเปลี่ยนรหัสผ่านใหม่ โปรดระบุรหัสผ่านใหม่ของท่าน"},
+			{"name": "passwordexpire_label", "value": "รหัสผ่านของท่านหมดอายุการใช้งาน โปรดระบุรหัสผ่านใหม่ของท่าน"}
 		]
 	},
 	{
@@ -36,7 +43,7 @@
 			{"name": "profile_label", "value": "Profile"},
 			{"name": "changepwd_label", "value": "Change Password"},
 			{"name": "logout_label", "value": "Log Out"},
-			{"name": "profile_caption", "value": "User Information"},
+			{"name": "profile_caption", "value": "User Profile"},
 			{"name": "profilenotfound_label", "value": "Profile not found"},
 			{"name": "usertname_label", "value": "First Name(Thai)"},
 			{"name": "usertsurname_label", "value": "Last Name(Thai)"},
@@ -46,7 +53,13 @@
 			{"name": "email_label", "value": "Email"},
 			{"name": "mobile_label", "value": "Mobile"},
 			{"name": "lineid_label", "value": "Line ID"},
-			{"name": "langcode_label", "value": "Display Language"}
+			{"name": "changepassword_caption", "value": "Change Password"},
+			{"name": "oldpassword_label", "value": "Old Password"},
+			{"name": "userpassword_label", "value": "New Password"},
+			{"name": "confirmpassword_label", "value": "Confirm Password"},
+			{"name": "matchpassword_alert", "value": "New Password does not match to Confirm Password"},
+			{"name": "passwordforce_label", "value": "The system force you to change password, please specify your new password."},
+			{"name": "passwordexpire_label", "value": "Your password was expired, please specify your new password."}
 		]
 	}
 ]

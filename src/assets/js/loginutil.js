@@ -61,7 +61,7 @@ function recentApplication(app,favorite) {
 }
 export function hideWorkSpace() {
 	$("#workingframe").hide();
-	window.open(getBaseUrl()+"/blank.html","workingframe");
+	window.open("./blank.html","workingframe");
 } 
 export function hideWorkingFrame() {
 	hideWorkSpace();
@@ -154,16 +154,16 @@ export function verifyAfterLogin(json,callback,accessor,favorite) {
 			$("#fsworkinglayer").removeClass("working-control-class");
 			openPage({programid: "page_change", parameters: "changed=expire"},accessor,favorite);
 		} else {
-			doAfterLogin(json);
-			if(callback) callback();
+			doAfterLogin(json,callback);
 		}
 	}
 }
-export function doAfterLogin(json) {
+export function doAfterLogin(json,callback) {
 	if(json) {
 		let avatar = json.body.avatar;
 		if(avatar && avatar.trim().length > 0) {
 			$("#avatarimage").removeClass("img-avatar").attr("src",avatar);
 		}
 	}
+	if(callback) callback();
 }

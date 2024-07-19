@@ -34,8 +34,7 @@ a.tile.fa-box-title.fav-app:hover .todo { display: block; }
 import $ from "jquery";
 import { ref } from 'vue';
 import { getApiUrl, getImgUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo.js";
-import { submitFailure } from "@/assets/js/apputil.js";
-import { getAccessorToken } from "@/assets/js/messenger.js";
+import { submitFailure, serializeParameters } from "@/assets/js/apputil.js";
 import { openPage } from "@/assets/js/loginutil.js";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";
@@ -84,17 +83,18 @@ export default {
         let access_user = info?.userid;
         if(!access_user || access_user.trim().length==0) return;
         let language = this.accessor.lang;
-        let authtoken = getAccessorToken();
+        let params = { userid: access_user, language: language };
+        let formdata = serializeParameters(params);
         $.ajax({
             url: getApiUrl()+"/api/menu/favor",
-            data: { userid: access_user, language: language },
-            headers : { "authtoken": authtoken },
+            data: formdata.jsondata,
+            headers : formdata.headers,
             type: "POST",
             dataType: "json",
             contentType: DEFAULT_CONTENT_TYPE,
             success: (data) => { 
                 console.log("loadFavorMenu: success",data);
-                let dataset = data.body.dataset;
+                let dataset = data.body?.dataset;
                 if(dataset) {
                     let rows = dataset.rows;
                     if(rows) {
@@ -111,17 +111,19 @@ export default {
         console.log("loadProgramItems: accessor",this.accessor);
         let access_user = this.accessor.info?.userid;
         if(!access_user || access_user.trim().length==0) return;
-        let authtoken = getAccessorToken();
+        let formdata = serializeParameters({ userid: access_user });
         $.ajax({
             url: getApiUrl()+"/api/menu/favorprog",
+            data: formdata.jsondata,
+            headers : formdata.headers,
             type: "POST",
-            data: { userid: access_user },
-            headers : { "authtoken": authtoken },
             dataType: "json",
             contentType: DEFAULT_CONTENT_TYPE,
-            success: (data,status,transport) => { 
-                console.log("loadProgramItems: success",transport.responseText);                
-                this.favorite.setProgLists(data.body.rows);
+            success: (data) => { 
+                console.log("loadProgramItems: success",data);
+                if(data.body?.rows) {
+                    this.favorite.setProgLists(data.body.rows);
+                }
             },
         });	
     },
@@ -138,12 +140,13 @@ export default {
             let fs_user = this.accessor.info?.userid;
             let fs_prog = prog.programid;
             let fs_seqno = this.currentFavor.seqno;
-            let authtoken = getAccessorToken();
+            let params = { userid: fs_user, programid: fs_prog, seqno: fs_seqno };
+            let formdata = serializeParameters(params);
             $.ajax({
                 url: getApiUrl()+"/api/menu/insert",
+                data: formdata.jsondata,
+                headers : formdata.headers,
                 type: "POST",
-                data: { userid: fs_user, programid: fs_prog, seqno: fs_seqno },
-                headers : { "authtoken": authtoken },
                 dataType: "html",
                 contentType: DEFAULT_CONTENT_TYPE,
                 error : function(transport,status,errorThrown) { 
@@ -170,12 +173,13 @@ export default {
         console.log("deleteFavorItem: item",item);
         let fs_user = this.accessor.info?.userid;
         let fs_seqno = item.seqno ? item.seqno : index;
-        let authtoken = getAccessorToken();
+        let params = { userid: fs_user, programid: item.programid, seqno: fs_seqno };
+        let formdata = serializeParameters(params);
 		$.ajax({
 			url: getApiUrl()+"/api/menu/remove",
+            data: formdata.jsondata,
+            headers : formdata.headers,
 			type: "POST",
-			data: { userid: fs_user, programid: item.programid, seqno: fs_seqno },
-			headers : { "authtoken": authtoken },
 			dataType: "html",
 			contentType: DEFAULT_CONTENT_TYPE,
 			error : function(transport,status,errorThrown) { 

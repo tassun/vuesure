@@ -2,7 +2,7 @@
   <div id="fsworkinglayer" class="working-class working-control-class">
     <div ref="pagecontainer" id="pagecontainer" class="pt-pager">
       <keep-alive>
-        <component :is="currentComponent" :visible="componentVisible" :labels="labels" ref="viewComponent" @activated="componentActivated" @success="updateSuccess"/>
+        <component :is="currentComponent" :visible="componentVisible" :labels="labels" ref="viewComponent" @activated="componentActivated" @success="processSuccess" />
       </keep-alive>
     </div> 
     <iframe id="workingframe" name="workingframe" width="100%" class="working-frame" title="Working" v-show="workingVisible"></iframe>
@@ -16,9 +16,10 @@ import { refreshScreen, hideWorkSpace } from "@/assets/js/loginutil.js";
 import { accessor } from "@/assets/js/accessor.js";
 import WorkerMenu from "./menu/WorkerMenu.vue";
 import ProfileForm from "./form/ProfileForm.vue";
+import ChangeForm from "./form/ChangeForm.vue";
 
 export default {
-  components: { WorkerMenu, ProfileForm },
+  components: { WorkerMenu, ProfileForm, ChangeForm },
   props: {
     labels: Object,    
     visible: {
@@ -82,13 +83,21 @@ export default {
       this.currentComponent = "ProfileForm";
       hideWorkSpace();
     },
+    showChangePassword() {
+      $("#pagecontainer").show();
+      this.workingVisible = false;
+      this.componentVisible = true;
+      this.currentComponent = "ChangeForm";
+      hideWorkSpace();
+    },
     componentActivated(name) {
       console.log("component activated: ",name);
       if("profile"==name) this.$refs.viewComponent.display();
+      if("changepassword"==name) this.$refs.viewComponent.display();
     },
-    updateSuccess(action,info) {
-      console.log("updateSuccess: action",action,", info",info);
-      if("profile"==action) {
+    processSuccess(action,info) {
+      console.log("processSuccess: action",action,", info",info);
+      if("profile"==action || "changepassword"==action) {
         this.showWorkerMenu();
       }
     },
