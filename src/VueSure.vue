@@ -7,7 +7,9 @@
     <WorkerFrame ref="workerFrame" :visible="workingVisible" :labels="labels" />
   </div>
   <div id="forcelayer" ref="forcelayer" v-show="isShowing == false">
-    <component :is="currentForcePage" :labels="labels" ref="forceComponent" @activated="componentActivated" @success="processSuccess" />
+    <keep-alive>
+      <component :is="currentForcePage" ref="forceComponent" :labels="labels" @activated="componentActivated" @success="processSuccess" />
+    </keep-alive>
   </div>
 </template>
 <script>
@@ -35,7 +37,8 @@ export default {
     let menuVisible = ref(false);
     let workingVisible = ref(false);
     let currentForcePage = ref("BlankForm");
-    return { labels, accessor, favorite, isShowing, loginVisible, menuVisible, workingVisible, currentForcePage };
+    let mode = ref("");
+    return { labels, accessor, favorite, isShowing, loginVisible, menuVisible, workingVisible, currentForcePage, mode };
   },
   mounted() {
     console.log("App: on mounted ...");
@@ -48,7 +51,7 @@ export default {
           this.loginVisible = true;
           setTimeout(() => { this.$refs.loginForm.focus(); },5);          
 				} else {
-					this.verifyLogin(json);
+					this.verifyAfterLogin(json);
 				}
 			});
     });
@@ -58,25 +61,38 @@ export default {
       let labelModel = getLabelModel(lang);
       this.labels = labelModel;
     },
-    verifyLogin(json) {
-      console.log("verifyLogin:",json);
+    verifyAfterLogin(json) {
+      console.log("verifyAfterLogin:",json);
+      this.setAccessInfo(json.body);
       if(json.body?.changeflag=="1") {
         console.log("force change password ...");
+        this.isShowing = false;
+        this.mode = "force";
+        this.currentForcePage = "ChangeForm";
       } else if(json.body?.expireflag=="1") {
         console.log("password expired ...");
+        this.isShowing = false;
+        this.mode = "expire";
+        this.currentForcePage = "ChangeForm";
       } else {
-        this.loginSuccess(json.body);
+        this.displayMenu();
       }
     },
-    loginSuccess(info) {
-      console.log("login success: info",info);
+    setAccessInfo(info) {
       this.accessor.setInfo(info);      
       if(this.accessor.info?.langcode && this.accessor.info?.langcode.trim().length > 0) {
         this.$refs.headerBar.changeLanguage(this.accessor.info?.langcode);
       }
+    },
+    loginSuccess(info) {
+      console.log("login success: info",info);
+      this.setAccessInfo(info);
       this.displayMenu();
     },
     displayMenu() {
+      this.mode = "";
+      this.currentForcePage = "BlankForm";
+      this.isShowing = true;
       this.loginVisible = false;
       this.menuVisible = true;
       this.$refs.headerBar.setting((menulists) => { this.openFistPage(menulists); });
@@ -121,6 +137,7 @@ export default {
     },
     componentActivated(name) {
       console.log("component activated: ",name);
+      if("changepassword"==name) this.$refs.forceComponent.display(this.mode);
     },
     processSuccess(action,info) {
       console.log("processSuccess: action",action,", info",info);

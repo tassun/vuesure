@@ -4,11 +4,11 @@
     <div id="change_entrypanel">
         <div id="change_entrylayer" class="entry-layer">
             <div class="portal-area sub-entry-layer">
-                <div class="row row-height" v-if="isChanged">
+                <div class="row row-height" v-show="isChanged">
                     <div class="col-md-3 col-height col-label">&nbsp;</div>
                     <div class="col-md-7 col-height">
-                        <label v-if="changedMode == 'force'">{{ labels.passwordforce_label }}</label>
-                        <label v-if="changedMode == 'expire'">{{ labels.passwordexpire_label }}</label>
+                        <label v-show="isForced">{{ labels.passwordforce_label }}</label>
+                        <label v-show="isExpired">{{ labels.passwordexpire_label }}</label>
                     </div>
                 </div>
                 <div class="row row-height">
@@ -74,7 +74,11 @@ const formData = {
 
 export default {
   props: {
-    labels: Object,    
+    labels: Object,
+    mode: {
+      type: String,
+      default: "",
+    } ,   
   },
   emits: ["success"],
   setup(props,context) {
@@ -99,9 +103,8 @@ export default {
       console.log("ChangeForm.vue: onActivated ... ");
       context.emit("activated","changepassword");
     });
-    const isChanged = ref(false);
     const changedMode = ref("");
-    return { v$, accessor, policies, localData, reqalert, matchalert, onactivated, isChanged, changedMode };
+    return { v$, accessor, policies, localData, reqalert, matchalert, onactivated, changedMode };
   },
   created() {
     watch(this.$props, (newProps) => {      
@@ -116,6 +119,9 @@ export default {
     });
   },
   computed: {
+    isChanged() { return this.changedMode != ""; },
+    isForced() { return this.changedMode == 'force'; },
+    isExpired() { return this.changedMode == 'expire'; },
     policyLists() {
       return  this.policies.getCategory(this.accessor.lang ?? "EN");
     },
@@ -215,9 +221,11 @@ export default {
         });
       }			
     },
-    display() {
+    display(mode="") {
+      this.changedMode = mode;
       this.reset();
       this.focus();
+      console.log("ChangeForm.vue: changedMode",this.changedMode);
     },
   },
 };

@@ -29,8 +29,9 @@ export function openProgram(app,accessor,favorite,callback) {
 	}
 	console.log("openProgram: app url",appurl);
 	let authtoken = getAccessorToken();
+	let awin;
 	if(fs_newwindows) {
-		let awin = openNewWindow({
+		awin = openNewWindow({
 			method: html?"GET":"POST",
 			url : appurl,
 			windowName: "fs_window_"+appid,
@@ -49,7 +50,8 @@ export function openProgram(app,accessor,favorite,callback) {
 		startWaiting();
 	}
 	recentApplication(app,favorite);
-	if(callback) callback();
+	if(callback) callback(awin);
+	return awin;
 }
 function recentApplication(app,favorite) {
 	if(!favorite) return;

@@ -1,15 +1,19 @@
 <template>
-<div id="blanklayer">{{ labels.system_label }}</div>
+<div id="blanklayer"></div>
 </template>
-<script setup>
-import { defineProps, onActivated } from 'vue';
-    defineProps({
-        labels: Object
-    });
+<script>
+import { onActivated } from 'vue';
 
-    onActivated(() => {
+export default {
+  props: {
+    labels: Object,
+  },
+  setup(props,context) {
+    let onactivated = onActivated(() => {
         console.log("BlankForm.vue: onActivated ... ");
-        this.$emit("activated","blank");
+        context.emit("activated","blank");
     });
-
+    return { onactivated };
+  },
+};
 </script>
