@@ -4,14 +4,12 @@ var BASE_URL = process.env.VUE_APP_BASE_URL;
 var CDN_URL = process.env.VUE_APP_CDN_URL;
 var IMG_URL = process.env.VUE_APP_IMG_URL;
 var BASE_STORAGE = process.env.VUE_APP_BASE_STORAGE;
-var API_TOKEN;
-var DEFAULT_RAW_PARAMETERS = false;
+var API_TOKEN = process.env.VUE_APP_API_TOKEN;
+var DEFAULT_RAW_PARAMETERS = process.env.VUE_APP_DEFAULT_RAW_PARAMETERS == "true";
 export const DEFAULT_CONTENT_TYPE = "application/x-www-form-urlencoded; charset=UTF-8";
-console.log("DEFAULT_LANGUAGE="+DEFAULT_LANGUAGE);
-console.log("API_URL="+API_URL);
-console.log("BASE_URL="+BASE_URL);
-console.log("CDN_URL="+CDN_URL);
-console.log("BASE_STORAGE="+BASE_STORAGE);
+console.info("DEFAULT_LANGUAGE="+DEFAULT_LANGUAGE,", BASE_STORAGE="+BASE_STORAGE,", DEFAULT_RAW_PARAMETERS="+DEFAULT_RAW_PARAMETERS);
+console.info("API_URL="+API_URL,", BASE_URL="+BASE_URL,", CDN_URL="+CDN_URL,", IMG_URL="+IMG_URL);
+console.info("API_TOKEN="+API_TOKEN);
 export function getDefaultLanguage() { return DEFAULT_LANGUAGE; }
 export function setDefaultLanguage(language) {
 	console.log("set default_language="+language);
