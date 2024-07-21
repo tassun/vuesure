@@ -1,10 +1,10 @@
 import $ from "jquery"
-import { startWaiting, openNewWindow, submitWindow }  from '@/assets/js/apputil.js'
+import { startWaiting, openNewWindow, submitWindow, closeChildWindows}  from '@/assets/js/apputil.js'
 import { getApiUrl, getBaseUrl, getDefaultLanguage,  DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo";
-import { getAccessorToken, removeAccessorInfo, getAccessorInfo, saveAccessorInfo, getStorage, removeStorage, setupDiffie } from "@/assets/js/messenger";
+import { getAccessorToken, removeAccessorInfo, getAccessorInfo, saveAccessorInfo, getStorage, removeStorage, setupDiffie, setCurrentWindow } from "@/assets/js/messenger";
 
 export function openPage(app,accessor,favorite,callback) {
-	openProgram(app,accessor,favorite,callback);
+	return openProgram(app,accessor,favorite,callback);
 }
 const except_apps = ["page_profile","page_change","page_first","page_login","page_work","page_forgot","factor"];
 export function openProgram(app,accessor,favorite,callback) {
@@ -35,7 +35,7 @@ export function openProgram(app,accessor,favorite,callback) {
 			method: html?"GET":"POST",
 			url : appurl,
 			windowName: "fs_window_"+appid,
-			params: "authtoken="+authtoken+"&language="+getDefaultLanguage()+(params?"&"+params:"")
+			params: "seed="+Math.random()+"&authtoken="+authtoken+"&language="+getDefaultLanguage()+(params?"&"+params:"")
 		});
 		awin.focus();
 	} else {
@@ -45,10 +45,11 @@ export function openProgram(app,accessor,favorite,callback) {
 			method: html?"GET":"POST",
 			url : appurl,
 			windowName: "workingframe",
-			params: "authtoken="+authtoken+"&language="+getDefaultLanguage()+(params?"&"+params:"")
+			params: "seed="+Math.random()+"&authtoken="+authtoken+"&language="+getDefaultLanguage()+(params?"&"+params:"")
 		});
 		startWaiting();
 	}
+	setCurrentWindow(awin);
 	recentApplication(app,favorite);
 	if(callback) callback(awin);
 	return awin;
@@ -82,6 +83,7 @@ export function doLogout() {
 	removeAccessorInfo();
 	doLogin();
 	clearAvatar();
+	closeChildWindows();
 }
 export function clearAvatar() {
 	$("#avatarimage").addClass("img-avatar");
