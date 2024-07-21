@@ -1,7 +1,7 @@
 import $ from "jquery"
 import bootbox from "bootbox"
 import { getMessageCode } from "./msgutil"
-import { getAccessorToken, setMessagingCallback, getDH } from "./messenger";
+import { getAccessorToken, requestAccessorInfo, getDH } from "./messenger";
 import { getDefaultRawParameters, getDefaultLanguage } from "./appinfo";
 
 const fs_winary = new Array();
@@ -338,7 +338,11 @@ export function startApplication(pid,callback) {
 		$.fn.modal.Constructor.Default.backdrop = "static";
 		$.fn.modal.Constructor.Default.keyboard = false;
 	} catch(ex) { console.error(ex);  }
-	setMessagingCallback(callback);
+	if(callback) setupApplication(callback);
+}
+export function setupApplication(callback) {
+	let reply = requestAccessorInfo(callback);
+	console.log("request access info: ",reply);
 }
 export function serializeParameters(parameters, addonParameters, raw) {
 	if(addonParameters) {
