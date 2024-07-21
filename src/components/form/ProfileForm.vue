@@ -1,9 +1,7 @@
 <template>
 	<div id="page_profile" class="pt-page pt-page-current pt-page-controller" v-show="visible">
 		<h1 class="page-header-title" title="page_profile">{{ labels.profile_caption }}</h1>
-    <div id="profile_loading" v-show="loadVisible == true">
-      <span>Loading ...</span>
-    </div>
+    <LoadingPage :visible="loadVisible" />
 		<div id="profile_entrypanel" v-show="loadVisible == false">
       <div id="profile_entrylayer" class="entry-layer" v-show="infoVisible">
           <div class="portal-area sub-entry-layer">
@@ -111,6 +109,7 @@ import { required, helpers, email } from '@vuelidate/validators';
 import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/appinfo.js';
 import { startWaiting, stopWaiting, parseErrorThrown, alertbox, serializeParameters, confirmSave, successbox }  from '@/assets/js/apputil.js';
 import { accessor } from "@/assets/js/accessor.js";
+import LoadingPage from "../../controls/LoadingPage.vue";
 
 const formData = {
     usertname: '',
@@ -125,6 +124,7 @@ const formData = {
 };
 
 export default {
+  components: { LoadingPage },
   props: {
     labels: Object,    
     visible: {
