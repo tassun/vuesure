@@ -1,7 +1,10 @@
 <template>
 	<div id="page_profile" class="pt-page pt-page-current pt-page-controller" v-show="visible">
 		<h1 class="page-header-title" title="page_profile">{{ labels.profile_caption }}</h1>
-		<div id="profile_entrypanel">
+    <div id="profile_loading" v-show="loadVisible == true">
+      <span>Loading ...</span>
+    </div>
+		<div id="profile_entrypanel" v-show="loadVisible == false">
       <div id="profile_entrylayer" class="entry-layer" v-show="infoVisible">
           <div class="portal-area sub-entry-layer">
               <div class="row row-height">
@@ -98,6 +101,7 @@
 </template>
 <style>
 .entry-not-found { text-align: center; font-size: 25px; padding-top: 15px; }
+#profile_loading { text-align: center; font-size: 2.0rem; padding-top: 50px; }
 </style>
 <script>
 import $ from "jquery";
@@ -131,6 +135,7 @@ export default {
   emits: ["success"],
   setup(props,context) {
     const localData = ref({...formData});
+    const loadVisible = ref(true);
     const infoVisible = ref(true);
     const notfoundVisible = ref(false);
     const langlists = ref([]);
@@ -157,7 +162,7 @@ export default {
       console.log("ProfileForm.vue: onActivated ... ");
       context.emit("activated","profile");
     });
-    return { accessor, v$, localData, reqalert, emailalert, infoVisible, notfoundVisible, langlists, onactivated };
+    return { accessor, v$, localData, reqalert, emailalert, loadVisible, infoVisible, notfoundVisible, langlists, onactivated };
   },
   created() {
     watch(this.$props, (newProps) => {      
@@ -284,6 +289,7 @@ export default {
     retrieve(callback) {
         console.log("retrieve: info",this.accessor);
         if(this.accessor.info?.userid) {
+            this.loadVisible = true;
             //try to get profile info
             let params = {userid: this.accessor.info?.userid};
             let jsondata = {ajax: true};
@@ -313,6 +319,7 @@ export default {
       if(data.head?.errorflag=="Y") {
         alertbox(data.head.errordesc);
       } else {
+        this.loadVisible = false;
         if(data.body?.rows?.length >0) {
           this.localData = {...data.body.rows[0]};
           this.infoVisible = true;

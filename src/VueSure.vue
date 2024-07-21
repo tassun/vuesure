@@ -68,12 +68,12 @@ export default {
         console.log("force change password ...");
         this.isShowing = false;
         this.mode = "force";
-        this.currentForcePage = "ChangeForm";
+        this.currentForcePage = ChangeForm;
       } else if(json.body?.expireflag=="1") {
         console.log("password expired ...");
         this.isShowing = false;
         this.mode = "expire";
-        this.currentForcePage = "ChangeForm";
+        this.currentForcePage = ChangeForm;
       } else {
         this.displayMenu();
       }
@@ -91,7 +91,7 @@ export default {
     },
     displayMenu() {
       this.mode = "";
-      this.currentForcePage = "BlankForm";
+      this.currentForcePage = BlankForm;
       this.isShowing = true;
       this.loginVisible = false;
       this.menuVisible = true;
