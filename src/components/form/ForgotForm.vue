@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-page forgot-page">
+    <div class="pt-page forcer-page">
       <h1 class="page-header-title">{{ labels.forgot_caption }}</h1>
       <div id="page_forgot" class="entry-layer page-layer forgot-layer portal-area" v-show="successVisible == false">
         <div class="portal-area sub-entry-layer forgot-area">
@@ -82,7 +82,7 @@
 .sub-entry-layer { padding-top: 10px; padding-left: 5px; padding-bottom: 15px; }
 .forgot-layer { margin-top: 0px; margin-left: 3px; padding-bottom: 20px;}
 .forgot-area { padding-left: 20px; }
-.forgot-page { width:99.8%; display: block; }
+.forcer-page { max-width: 95%; display: block; margin-left: auto; margin-right: auto; }
 #secureimage { border: 1px solid gray; }
 #secureimage_ctrl { min-width:30px; }
 #secureimage_ctrl_layer { vertical-align: bottom; }

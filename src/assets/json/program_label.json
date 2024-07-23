@@ -37,7 +37,11 @@
 			{"name": "requestpwd_label", "value": "คำร้องการขอตั้งรหัสผ่านใหม่สำเร็จ"},
 			{"name": "resetlogin_label", "value": "เข้าสู่ระบบ"},
 			{"name": "securecode_info", "value": "โปรดระบุผลลัพธ์จากการบวกเลขทั้งสองจำนวนตามภาพที่กำหนด"},
-			{"name": "forgotpassword_info", "value": "โปรดระบุรหัสผู้ใช้งานกับที่อยู่อีเมล์พร้อมรหัสลับจากภาพที่กำหนด"}
+			{"name": "forgotpassword_info", "value": "โปรดระบุรหัสผู้ใช้งานกับที่อยู่อีเมล์พร้อมรหัสลับจากภาพที่กำหนด"},
+			{"name": "factor_caption", "value": "การตรวจสอบ"},
+			{"name": "factor_label", "value": "เพิ่ม 2FA"},
+			{"name": "factorcode_label", "value": "รหัสตรวจสอบ"},
+			{"name": "submit_button", "value": "ยอมรับ"}
 		]
 	},
 	{
@@ -77,7 +81,11 @@
 			{"name": "requestpwd_label", "value": "Request reset password success"},
 			{"name": "resetlogin_label", "value": "Log In"},
 			{"name": "securecode_info", "value": "Please specify the result of two value operate from image"},
-			{"name": "forgotpassword_info", "value": "Please identify your email address with secure code from image"}
+			{"name": "forgotpassword_info", "value": "Please identify your email address with secure code from image"},
+			{"name": "factor_caption", "value": "Verification"},
+			{"name": "factor_label", "value": "Add 2FA"},
+			{"name": "factorcode_label", "value": "Verify Code"},
+			{"name": "submit_button", "value": "Submit"}
 		]
 	}
 ]

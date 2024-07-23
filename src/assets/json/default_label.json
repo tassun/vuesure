@@ -56,7 +56,7 @@
 			{"name": "retrieve_button", "value": "Retrieve"},
 			{"name": "search_button", "value": "Search"},
 			{"name": "saveas_button", "value": "Save As"},
-			{"name": "submit_button", "value": "Submit Data"},
+			{"name": "submit_button", "value": "Submit"},
 			{"name": "cancel_button", "value": "Cancel"},
 			{"name": "clear_button", "value": "Clear"},
 			{"name": "reset_button", "value": "Clear"},

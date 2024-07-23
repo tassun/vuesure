@@ -1,5 +1,5 @@
 <template>
-<div id="page_change" class="pt-page pt-page-current pt-page-controller">
+<div id="page_change" class="pt-page pt-page-current pt-page-controller" :class="{'forcer-page': isChanged}">
     <h1 class="page-header-title" title="page_change">{{ labels.changepassword_caption }}</h1>
     <div id="change_entrypanel">
         <div id="change_entrylayer" class="entry-layer">
@@ -56,6 +56,9 @@
     </div>
 </div>
 </template>
+<style>
+.forcer-page { max-width: 95%; display: block; margin-left: auto; margin-right: auto; }
+</style>
 <script>
 import $ from "jquery";
 import { ref, computed, watch, onActivated } from 'vue';

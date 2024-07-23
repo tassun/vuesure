@@ -26,10 +26,11 @@ import WorkerFrame from "./components/WorkerFrame.vue";
 import BlankForm from "./components/form/BlankForm.vue";
 import ChangeForm from "./components/form/ChangeForm.vue";
 import ForgotForm from "./components/form/ForgotForm.vue";
+import FactorForm from "./components/form/FactorForm.vue";
 
 export default {
   components: {
-    HeaderBar, LoginForm, WorkerFrame, BlankForm, ChangeForm, ForgotForm
+    HeaderBar, LoginForm, WorkerFrame, BlankForm, ChangeForm, ForgotForm, FactorForm
   },
   setup() {
     let labels = ref(getLabelModel());
@@ -65,19 +66,29 @@ export default {
     verifyAfterLogin(body) {
       console.log("verifyAfterLogin: body",body);
       this.setAccessInfo(body);
-      if(body?.changeflag=="1") {
-        console.log("force change password ...");
+      if(body?.factorverify && body?.factorid!="" && (body?.factorcode==undefined || body?.factorcode=="")) {
+        console.log("two factor ...");
         this.isShowing = false;
-        this.mode = "force";
-        this.currentForcePage = ChangeForm;
-      } else if(body?.expireflag=="1") {
-        console.log("password expired ...");
-        this.isShowing = false;
-        this.mode = "expire";
-        this.currentForcePage = ChangeForm;
+        this.mode = "factor";
+        this.currentForcePage = FactorForm;
       } else {
-        this.displayMenu();
+        this.verifyForcePage(body);
       }
+    },
+    verifyForcePage(body) {
+      if(body?.changeflag=="1") {
+          console.log("force change password ...");
+          this.isShowing = false;
+          this.mode = "force";
+          this.currentForcePage = ChangeForm;
+        } else if(body?.expireflag=="1") {
+          console.log("password expired ...");
+          this.isShowing = false;
+          this.mode = "expire";
+          this.currentForcePage = ChangeForm;
+        } else {
+          this.displayMenu();
+        }
     },
     setAccessInfo(info) {
       this.accessor.setInfo(info);      
@@ -88,8 +99,6 @@ export default {
     loginSuccess(info) {
       console.log("login success: info",info);
       this.verifyAfterLogin(info);
-      //this.setAccessInfo(info);
-      //this.displayMenu();
     },
     displayMenu() {
       this.mode = "";
@@ -146,11 +155,14 @@ export default {
       console.log("component activated: ",name);
       if("changepassword"==name) this.$refs.forceComponent.display(this.mode);
       else if("forgot"==name) this.$refs.forceComponent.display(this.mode);
+      else if("factor"==name) this.$refs.forceComponent.display(this.mode);
     },
     processSuccess(action,info) {
       console.log("processSuccess: action",action,", info",info);
       if("changepassword"==action) {
         this.displayMenu();
+      } else if("factor"==action) {
+        this.verifyForcePage(this.accessor.info);
       }
     },
     forgotPassword() {
