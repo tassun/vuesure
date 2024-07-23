@@ -107,7 +107,7 @@ import { ref, computed, watch, onActivated } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers, email } from '@vuelidate/validators';
 import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/appinfo.js';
-import { startWaiting, stopWaiting, parseErrorThrown, alertbox, serializeParameters, confirmSave, successbox }  from '@/assets/js/apputil.js';
+import { startWaiting, stopWaiting, submitFailure, alertbox, serializeParameters, confirmSave, successbox }  from '@/assets/js/apputil.js';
 import { accessor } from "@/assets/js/accessor.js";
 import LoadingPage from "../../controls/LoadingPage.vue";
 
@@ -261,9 +261,7 @@ export default {
         dataType: "json",
         contentType: DEFAULT_CONTENT_TYPE,
         error : function(transport,status,errorThrown) { 
-          stopWaiting();
-          errorThrown = parseErrorThrown(transport, status, errorThrown);
-          alertbox(errorThrown);
+          submitFailure(transport,status,errorThrown,false);
         },
         success: (data,status,xhr) => { 
           console.log("saveRecord: success : ",xhr.responseText);
@@ -302,10 +300,8 @@ export default {
               type: "POST",
               dataType: "json",
               contentType: DEFAULT_CONTENT_TYPE,
-              error : function(transport,status,errorThrown) { 
-                stopWaiting();
-                errorThrown = parseErrorThrown(transport, status, errorThrown);
-                alertbox(errorThrown);
+              error : function(transport,status,errorThrown) {
+                submitFailure(transport,status,errorThrown,false); 
               },
               success: (data) => { 
                 stopWaiting();

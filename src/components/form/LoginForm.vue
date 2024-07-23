@@ -24,7 +24,7 @@
         </div>
         <br/>
         <div class="input-group-forgot"> 
-            <a href="javascript:void(0)" id="forgot_password" class="enter-class login-label" title="Forgot Password">{{ labels.forgot_label }}</a>
+            <a href="javascript:void(0)" id="forgot_password" class="enter-class login-label" title="Forgot Password" @click="$emit('forgot')">{{ labels.forgot_label }}</a>
         </div>
         <br/>										
         <div id="login_button_layer" class="login_button_layer">
@@ -48,7 +48,7 @@ import { ref, computed } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/appinfo.js';
-import { startWaiting, stopWaiting, parseErrorThrown, alertbox }  from '@/assets/js/apputil.js';
+import { startWaiting, stopWaiting, submitFailure, alertbox }  from '@/assets/js/apputil.js';
 import { saveAccessorInfo, setupDiffie } from "@/assets/js/messenger.js";
 
 const formData = {
@@ -69,7 +69,7 @@ export default {
       default: true,
     }
   },
-  emits: ["success"],
+  emits: ["success","forgot"],
   setup(props) {
     let localInfo = ref({});
     let localData = ref({...formData});
@@ -139,10 +139,8 @@ export default {
         contentType: DEFAULT_CONTENT_TYPE,
         data: params, 
         dataType: "json",
-        error : function(transport,status,errorThrown) { 
-          stopWaiting();
-          errorThrown = parseErrorThrown(transport, status, errorThrown);
-          alertbox(errorThrown);
+        error : function(transport,status,errorThrown) {
+          submitFailure(transport,status,errorThrown,false); 
         },
         success: (data,status,xhr) => { 
           console.log("startLogin: responseText",xhr.responseText);

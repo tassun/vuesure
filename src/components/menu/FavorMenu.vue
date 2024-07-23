@@ -150,7 +150,7 @@ export default {
                 dataType: "html",
                 contentType: DEFAULT_CONTENT_TYPE,
                 error : function(transport,status,errorThrown) { 
-                    submitFailure(transport,status,errorThrown);  
+                    submitFailure(transport,status,errorThrown,false);  
                 },
                 success: () => { 
                     Object.assign(this.currentFavor,prog);
@@ -183,7 +183,7 @@ export default {
 			dataType: "html",
 			contentType: DEFAULT_CONTENT_TYPE,
 			error : function(transport,status,errorThrown) { 
-				submitFailure(transport,status,errorThrown);  
+				submitFailure(transport,status,errorThrown,false);  
 			},
             success: () => { 
                 item.type = "new";

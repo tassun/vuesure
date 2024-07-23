@@ -116,12 +116,12 @@ export function startWaiting() {
 export function stopWaiting() { 
 	$("#fswaitlayer").hide();
 }
-export function submitFailure(xhr,status,errorThrown) { 
+export function submitFailure(xhr,status,errorThrown,checking=true) { 
 	stopWaiting();
 	console.log("submitFailure",xhr.responseText);
 	errorThrown = parseErrorThrown(xhr, status, errorThrown);
 	alertbox(errorThrown, function() { 
-		if(xhr.status==401) { 
+		if(checking && xhr.status==401) { 
 			try {
 				window.parent.reLogin();
 			}catch(ex) { console.error(ex); }

@@ -28,7 +28,16 @@
 			{"name": "confirmpassword_label", "value": "ยืนยันรหัสผ่าน"},
 			{"name": "matchpassword_alert", "value": "รหัสผ่านใหม่กับยืนยันรหัสผ่านไม่ตรงกัน"},
 			{"name": "passwordforce_label", "value": "ระบบบังคับให้ท่านต้องทำการเปลี่ยนรหัสผ่านใหม่ โปรดระบุรหัสผ่านใหม่ของท่าน"},
-			{"name": "passwordexpire_label", "value": "รหัสผ่านของท่านหมดอายุการใช้งาน โปรดระบุรหัสผ่านใหม่ของท่าน"}
+			{"name": "passwordexpire_label", "value": "รหัสผ่านของท่านหมดอายุการใช้งาน โปรดระบุรหัสผ่านใหม่ของท่าน"},
+			{"name": "forgot_caption", "value": "ลืมรหัสผ่าน"},
+			{"name": "securecode_label", "value": "คำตอบลับจากภาพ"},
+			{"name": "resetpwd_label", "value": "การตั้งรหัสผ่านใหม่สำเร็จ"},
+			{"name": "requestmsg_label", "value": "โปรดตรวจสอบ  ระบบได้ส่งการยืนยันคำร้องไปยังอีเมล์ของท่าน"},
+			{"name": "resetmsg_label", "value": "โปรดตรวจสอบ  ระบบได้ส่งรหัสผ่านใหม่ไปยังอีเมล์ของท่าน"},
+			{"name": "requestpwd_label", "value": "คำร้องการขอตั้งรหัสผ่านใหม่สำเร็จ"},
+			{"name": "resetlogin_label", "value": "เข้าสู่ระบบ"},
+			{"name": "securecode_info", "value": "โปรดระบุผลลัพธ์จากการบวกเลขทั้งสองจำนวนตามภาพที่กำหนด"},
+			{"name": "forgotpassword_info", "value": "โปรดระบุรหัสผู้ใช้งานกับที่อยู่อีเมล์พร้อมรหัสลับจากภาพที่กำหนด"}
 		]
 	},
 	{
@@ -59,7 +68,16 @@
 			{"name": "confirmpassword_label", "value": "Confirm Password"},
 			{"name": "matchpassword_alert", "value": "New Password does not match to Confirm Password"},
 			{"name": "passwordforce_label", "value": "The system force you to change password, please specify your new password."},
-			{"name": "passwordexpire_label", "value": "Your password was expired, please specify your new password."}
+			{"name": "passwordexpire_label", "value": "Your password was expired, please specify your new password."},
+			{"name": "forgot_caption", "value": "Forgot Password"},
+			{"name": "securecode_label", "value": "Answer Code"},
+			{"name": "resetpwd_label", "value": "Reset password success"},
+			{"name": "requestmsg_label", "value": "Please verify your email for request and activation changed"},
+			{"name": "resetmsg_label", "value": "Please verify your email for new password changed"},
+			{"name": "requestpwd_label", "value": "Request reset password success"},
+			{"name": "resetlogin_label", "value": "Log In"},
+			{"name": "securecode_info", "value": "Please specify the result of two value operate from image"},
+			{"name": "forgotpassword_info", "value": "Please identify your email address with secure code from image"}
 		]
 	}
 ]

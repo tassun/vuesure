@@ -3,7 +3,7 @@
   <div id="fswaitlayer" class="fa fa-spinner fa-spin"></div>
   <div id="mainlayer" ref="mainlayer" v-show="isShowing == true">
     <HeaderBar ref="headerBar" :visible="menuVisible" :labels="labels" @language-changed="changeLanguage" @menu-selected="menuSelected" />
-    <LoginForm ref="loginForm" :visible="loginVisible" :labels="labels" version="v1.0.0" @success="loginSuccess" />
+    <LoginForm ref="loginForm" :visible="loginVisible" :labels="labels" version="v1.0.0" @success="loginSuccess" @forgot="forgotPassword" />
     <WorkerFrame ref="workerFrame" :visible="workingVisible" :labels="labels" />
   </div>
   <div id="forcelayer" ref="forcelayer" v-show="isShowing == false">
@@ -24,11 +24,12 @@ import HeaderBar from "./components/menu/HeaderBar.vue";
 import LoginForm from "./components/form/LoginForm.vue";
 import WorkerFrame from "./components/WorkerFrame.vue";
 import BlankForm from "./components/form/BlankForm.vue";
-import ChangeForm from './components/form/ChangeForm.vue';
+import ChangeForm from "./components/form/ChangeForm.vue";
+import ForgotForm from "./components/form/ForgotForm.vue";
 
 export default {
   components: {
-    HeaderBar, LoginForm, WorkerFrame, BlankForm, ChangeForm
+    HeaderBar, LoginForm, WorkerFrame, BlankForm, ChangeForm, ForgotForm
   },
   setup() {
     let labels = ref(getLabelModel());
@@ -51,7 +52,7 @@ export default {
           this.loginVisible = true;
           setTimeout(() => { this.$refs.loginForm.focus(); },5);          
 				} else {
-					this.verifyAfterLogin(json);
+					this.verifyAfterLogin(json.body);
 				}
 			});
     });
@@ -61,15 +62,15 @@ export default {
       let labelModel = getLabelModel(lang);
       this.labels = labelModel;
     },
-    verifyAfterLogin(json) {
-      console.log("verifyAfterLogin:",json);
-      this.setAccessInfo(json.body);
-      if(json.body?.changeflag=="1") {
+    verifyAfterLogin(body) {
+      console.log("verifyAfterLogin: body",body);
+      this.setAccessInfo(body);
+      if(body?.changeflag=="1") {
         console.log("force change password ...");
         this.isShowing = false;
         this.mode = "force";
         this.currentForcePage = ChangeForm;
-      } else if(json.body?.expireflag=="1") {
+      } else if(body?.expireflag=="1") {
         console.log("password expired ...");
         this.isShowing = false;
         this.mode = "expire";
@@ -86,8 +87,9 @@ export default {
     },
     loginSuccess(info) {
       console.log("login success: info",info);
-      this.setAccessInfo(info);
-      this.displayMenu();
+      this.verifyAfterLogin(info);
+      //this.setAccessInfo(info);
+      //this.displayMenu();
     },
     displayMenu() {
       this.mode = "";
@@ -122,6 +124,11 @@ export default {
       this.menuVisible = false;
       this.accessor.reset();
     },
+    goLogIn() {
+      this.isShowing = true;
+      this.mode = "";
+      this.currentForcePage = BlankForm;
+    },
     openFistPage(menulists) {
       let page = this.accessor.info?.firstpage || "worklist";
       console.log("openFirstPage:",page);
@@ -138,12 +145,19 @@ export default {
     componentActivated(name) {
       console.log("component activated: ",name);
       if("changepassword"==name) this.$refs.forceComponent.display(this.mode);
+      else if("forgot"==name) this.$refs.forceComponent.display(this.mode);
     },
     processSuccess(action,info) {
       console.log("processSuccess: action",action,", info",info);
       if("changepassword"==action) {
         this.displayMenu();
       }
+    },
+    forgotPassword() {
+      console.log("forgot password click ...");
+      this.isShowing = false;
+      this.mode = "forgot";
+      this.currentForcePage = ForgotForm;
     },
   }
 };
