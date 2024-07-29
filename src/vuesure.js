@@ -16,6 +16,7 @@ import "./assets/css/user_style.css";
 import "./assets/css/page_login.css";
 import "./assets/css/page_first.css";
 import "./assets/js/appinfo.js";
+import "./assets/js/auth.js";
 import { createApp, version } from 'vue';
 import VueSure from './VueSure.vue';
 console.log("Vue version",version);

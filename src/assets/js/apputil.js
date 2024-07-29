@@ -181,6 +181,7 @@ export function alertbox(errcode, callback, defaultmsg, params, addonmsg, title,
 	}
 }
 export function alertDialog(msg, callbackfn, title="Alert", icon="fa fa-bell-o") {
+	if(!msg) { console.log("alertDialog: msg undefined"); return; }
 	try {
 		let fs_okbtn = getMessageCode("fsokbtn"); if(!fs_okbtn || (fs_okbtn=="" || fs_okbtn=="fsokbtn")) fs_okbtn = "OK";
 		//let fs_okbtn = "OK";

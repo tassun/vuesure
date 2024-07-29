@@ -41,7 +41,8 @@
 			{"name": "factor_caption", "value": "การตรวจสอบ"},
 			{"name": "factor_label", "value": "เพิ่ม 2FA"},
 			{"name": "factorcode_label", "value": "รหัสตรวจสอบ"},
-			{"name": "submit_button", "value": "ยอมรับ"}
+			{"name": "submit_button", "value": "ยอมรับ"},
+			{"name": "sso_label", "value": "ลงชื่อเข้าใช้ระบบแบบครั้งเดียว"}
 		]
 	},
 	{
@@ -85,7 +86,8 @@
 			{"name": "factor_caption", "value": "Verification"},
 			{"name": "factor_label", "value": "Add 2FA"},
 			{"name": "factorcode_label", "value": "Verify Code"},
-			{"name": "submit_button", "value": "Submit"}
+			{"name": "submit_button", "value": "Submit"},
+			{"name": "sso_label", "value": "Login via Single Sign-On"}
 		]
 	}
 ]

@@ -14,12 +14,13 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { startApplication }  from './assets/js/apputil.js';
-import { getLabelModel } from "./assets/js/labelutil.js";
-import { refreshScreen, logOut, validAccessToken, openPage } from "./assets/js/loginutil.js";
-import { removeAccessorInfo } from "./assets/js/messenger.js";
-import { accessor } from "./assets/js/accessor.js";
+import { startApplication }  from '@/assets/js/apputil.js';
+import { getLabelModel } from "@/assets/js/labelutil.js";
+import { refreshScreen, logOut, validAccessToken, openPage } from "@/assets/js/loginutil.js";
+import { removeAccessorInfo } from "@/assets/js/messenger.js";
+import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";
+import { isSSOSignedIn, doSSOLogout } from "@/assets/js/auth.js";
 import HeaderBar from "./components/menu/HeaderBar.vue";
 import LoginForm from "./components/form/LoginForm.vue";
 import WorkerFrame from "./components/WorkerFrame.vue";
@@ -132,6 +133,9 @@ export default {
       this.loginVisible = true;
       this.menuVisible = false;
       this.accessor.reset();
+      if(isSSOSignedIn()) {
+        doSSOLogout();
+      }
     },
     goLogIn() {
       this.isShowing = true;

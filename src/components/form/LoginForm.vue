@@ -37,6 +37,7 @@
             </div>
         </div>
         <br/>
+        <SSOPanel ref="ssoPanel" :labels="labels" @sso-selected="ssoSelected" />
       </div>
     </div>
   </div>
@@ -50,6 +51,8 @@ import { required, helpers } from '@vuelidate/validators';
 import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/appinfo.js';
 import { startWaiting, stopWaiting, submitFailure, alertbox }  from '@/assets/js/apputil.js';
 import { saveAccessorInfo, setupDiffie } from "@/assets/js/messenger.js";
+import { startSSO } from "@/assets/js/auth.js";
+import SSOPanel from "./SSOPanel.vue";
 
 const formData = {
     username: '',
@@ -57,6 +60,7 @@ const formData = {
 };
 
 export default {
+  components: { SSOPanel },
   props: {
     labels: Object,    
     version: {
@@ -159,6 +163,13 @@ export default {
         setupDiffie(data);
         this.success();
       }			
+    },
+    ssoSelected(item) {
+      console.log("LoginForm.vue: sso-seleced",item);
+      startSSO(item.domainid,(data) => {
+        console.log("SSO: data",data); 
+        this.loginSuccess(data);
+      });
     },
   }
 };
