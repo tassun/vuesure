@@ -1,6 +1,7 @@
 const path = require("path");
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({  
+  outputDir: "login", //this change target folder to spcified name
   pages: {
     index: {
       entry: 'src/vuesure.js',

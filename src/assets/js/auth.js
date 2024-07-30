@@ -124,12 +124,12 @@ export async function ssoSignIn() {
 export function ssoSignOut() {
     if(!msalObject) throw new Error("Configuration not found");
     if(!ssoSignedIn) throw new Error("Account does not signed in");
-    let homeurl = window.location.protocol+"//"+window.location.hostname+(window.location.port ? ':'+window.location.port: '')+"/";
+    let homeurl = window.location.protocol+"//"+window.location.hostname+(window.location.port ? ':'+window.location.port: '')+"/login";
     console.log("homeurl",homeurl);
     const logoutRequest = {
         account: msalObject.getAccountByUsername(username),
-        postLogoutRedirectUri: msalConfig.auth.redirectUri || homeurl,
-        mainWindowRedirectUri: msalConfig.auth.redirectUri || homeurl
+        postLogoutRedirectUri: homeurl, //msalConfig.auth.redirectUri || homeurl,
+        mainWindowRedirectUri: homeurl, //msalConfig.auth.redirectUri || homeurl
     };
     console.log("logoutRequest",logoutRequest);
     msalObject.logoutPopup(logoutRequest).then(() => {

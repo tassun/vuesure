@@ -1,5 +1,8 @@
 <template>
 <div id="ssologinlayer">
+    <div class="loading-layer" v-show="loadingVisible">
+        <span class="loading-span"><em class="fa fa-spinner fa-spin"></em></span><br/>
+    </div>
     <div class="login_button_layer" v-if="ssolists.length > 0">
         <fieldset class="login-field-set">
             <legend class="login-legend">
@@ -14,6 +17,10 @@
     </div>				
 </div>
 </template>
+<style scoped>
+.loading-span { color: #1E90FF; font-size: 2.0rem; }
+.loading-layer { text-align: center; font-size: 2.0rem; padding-top: 50px; }
+</style>
 <script>
 import $ from "jquery";
 import { ref } from 'vue';
@@ -26,7 +33,8 @@ export default {
   emits: ["sso-selected"],
   setup() {
     const ssolists = ref([]);
-    return { ssolists };
+    const loadingVisible = ref(true);
+    return { ssolists, loadingVisible };
   },
   mounted() {
     console.log("SSOPanel.vue mounted ...");
@@ -46,7 +54,11 @@ export default {
             type: "POST",
             dataType: "json",
             contentType: DEFAULT_CONTENT_TYPE,
-            success: (data,status,transport) => { 
+            error : () => {
+                this.loadingVisible = false;
+            },
+            success: (data,status,transport) => {
+                this.loadingVisible = false;
                 console.log("loadSettings: success",transport.responseText);                
                 if(data.body?.rows) {
                     this.ssolists = data.body.rows;
