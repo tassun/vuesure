@@ -1,4 +1,4 @@
-var DEFAULT_LANGUAGE = process.env.VUE_APP_DEFAULT_LANGUAGE ? process.env.VUE_APP_DEFAULT_LANGUAGE : "EN";
+var DEFAULT_LANGUAGE = process.env.VUE_APP_DEFAULT_LANGUAGE;
 var API_URL = process.env.VUE_APP_API_URL;
 var BASE_URL = process.env.VUE_APP_BASE_URL;
 var CDN_URL = process.env.VUE_APP_CDN_URL;
