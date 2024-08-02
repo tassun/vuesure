@@ -1,48 +1,56 @@
 <template>
-<div id="page_login" class="pt-page pt-page-1 pt-page-current" v-show="visible">
+<div id="page_login" v-show="visible">
   <div id="page_login_toplayer" class="page-login-logo">                				
-      <div id="login_logo_label"><span class="pass-word">PASS</span> &amp; <span class="go-word">GO</span></div>
+    <div id="login_logo_label"><span class="pass-word">PASS</span> &amp; <span class="go-word">GO</span></div>
   </div>
-  <div id="page_login_entry" class="page-login-entry">
-    <input type="hidden" id="main_useruuid" />
-    <div class="main-form" id="main_form" name="main_form">
-      <div id="loginformlayer" class="login_form login-portal-area">
-        <br/>     
-        <label id="login_label" class="login-label">{{ labels.login_label }}</label>   
-        <br/>  
-        <br/>    
-        <div class="input-group-name">
-            <label id="login_user_label" class="login-label">{{ labels.username_label }}</label>
-            <input ref="main_username" type="text" v-model="localData.username" id="main_username" name="username" class="form-control input-md" placeholder="User" maxlength="60"/>
-            <span v-if="v$.username.$error" class="has-error">{{ v$.username.$errors[0].$message }}</span>
-        </div>
-        <br/>
-        <div class="input-group-password">
-            <label id="login_password_label" class="login-label">{{ labels.password_label }}</label>
-            <input ref="main_pass" type="password" v-model="localData.password" id="main_pass" name="password" class="form-control input-md" placeholder="Password" autocomplete="off" />
-            <span v-if="v$.password.$error" class="has-error">{{ v$.password.$errors[0].$message }}</span>
-        </div>
-        <br/>
-        <div class="input-group-forgot"> 
-            <a href="javascript:void(0)" id="forgot_password" class="enter-class login-label" title="Forgot Password" @click="$emit('forgot')">{{ labels.forgot_label }}</a>
-        </div>
-        <br/>										
-        <div id="login_button_layer" class="login_button_layer">
-            <button id="main_button" class="form-control input-md" @click="loginClick">{{ labels.signin_label }}</button>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <label class="login-label">{{ version }}</label>
+  <div id="pager_login" class="pt-page pt-page-current">
+    <div id="page_login_area">
+      <div id="page_login_entry" class="page-login-entry">
+        <input type="hidden" id="main_useruuid" />
+        <div class="main-form" id="main_form" name="main_form">
+          <div id="loginformlayer" class="login_form login-portal-area">
+            <br/>     
+            <label id="login_label" class="login-label">{{ labels.login_label }}</label>   
+            <br/>  
+            <br/>    
+            <div class="input-group-name">
+                <label id="login_user_label" class="login-label">{{ labels.username_label }}</label>
+                <input ref="main_username" type="text" v-model="localData.username" id="main_username" name="username" class="form-control input-md" placeholder="User" maxlength="60"/>
+                <span v-if="v$.username.$error" class="has-error">{{ v$.username.$errors[0].$message }}</span>
             </div>
+            <br/>
+            <div class="input-group-password">
+                <label id="login_password_label" class="login-label">{{ labels.password_label }}</label>
+                <input ref="main_pass" type="password" v-model="localData.password" id="main_pass" name="password" class="form-control input-md" placeholder="Password" autocomplete="off" />
+                <span v-if="v$.password.$error" class="has-error">{{ v$.password.$errors[0].$message }}</span>
+            </div>
+            <br/>
+            <div class="input-group-forgot"> 
+                <a href="javascript:void(0)" id="forgot_password" class="enter-class login-label" title="Forgot Password" @click="$emit('forgot')">{{ labels.forgot_label }}</a>
+            </div>
+            <br/>										
+            <div id="login_button_layer" class="login_button_layer">
+                <button id="main_button" class="form-control input-md" @click="loginClick">{{ labels.signin_label }}</button>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <label class="login-label">{{ version }}</label>
+                </div>
+            </div>
+            <br/>
+            <SSOPanel ref="ssoPanel" :labels="labels" @sso-selected="ssoSelected" />
+          </div>
         </div>
-        <br/>
-        <SSOPanel ref="ssoPanel" :labels="labels" @sso-selected="ssoSelected" />
       </div>
     </div>
-  </div>
-</div>                                                        
+  </div>                                                        
+</div>
 </template>
+<style scoped>
+#page_login_toplayer { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+#page_login_area { padding-top: 170px; }
+</style>
 <script>
 import $ from "jquery";
 import { ref, computed } from 'vue';
