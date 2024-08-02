@@ -102,7 +102,6 @@ export function openNewWindow(settings) {
 	fs_window.opener = self; 
 	try {	 
 		addWindow(fs_window); 
-		console.log("fs_window",fs_window);
 	} catch(ex) { console.error(ex); } 
 	submitWindow(p);
 	return fs_window; 
