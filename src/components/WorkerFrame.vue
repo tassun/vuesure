@@ -11,8 +11,8 @@
 <script>
 import $ from "jquery";
 import { ref } from 'vue';
-import { stopWaiting }  from '@/assets/js/apputil.js';
-import { refreshScreen, hideWorkSpace } from "@/assets/js/loginutil.js";
+import { stopWaiting }  from '@/assets/js/app.util.js';
+import { refreshScreen, hideWorkSpace } from "@/assets/js/login.util.js";
 import { accessor } from "@/assets/js/accessor.js";
 import WorkerMenu from "./menu/WorkerMenu.vue";
 import ProfileForm from "./form/ProfileForm.vue";

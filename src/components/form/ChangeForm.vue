@@ -64,8 +64,8 @@ import $ from "jquery";
 import { ref, computed, watch, onActivated } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers, sameAs } from '@vuelidate/validators';
-import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/appinfo.js';
-import { startWaiting, stopWaiting, submitFailure, alertbox, serializeParameters, confirmSave, successbox }  from '@/assets/js/apputil.js';
+import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/app.info.js';
+import { startWaiting, stopWaiting, submitFailure, alertbox, serializeParameters, confirmSave, successbox }  from '@/assets/js/app.util.js';
 import { accessor } from "@/assets/js/accessor.js";
 import { policies } from "@/assets/js/policies.js";
 

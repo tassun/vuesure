@@ -14,9 +14,9 @@
 <script>
 import $ from "jquery";
 import { ref } from 'vue';
-import { getApiUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo.js";
-import { serializeParameters } from "@/assets/js/apputil.js";
-import { openPage } from "@/assets/js/loginutil.js";
+import { getApiUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/app.info.js";
+import { serializeParameters } from "@/assets/js/app.util.js";
+import { openPage } from "@/assets/js/login.util.js";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";
 import SiderMenu from "./SiderMenu.vue";

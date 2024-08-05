@@ -1,7 +1,7 @@
 import { PublicClientApplication, LogLevel, InteractionRequiredAuthError } from "@azure/msal-browser";
 import $ from "jquery"
-import { startWaiting, stopWaiting, submitFailure, alertDialog }  from '@/assets/js/apputil.js'
-import { getApiUrl, getBaseUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo";
+import { startWaiting, stopWaiting, submitFailure, alertDialog }  from '@/assets/js/app.util'
+import { getApiUrl, getBaseUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/app.info";
 
 var ssoCallback;
 export function setSSOCallback(callback) {

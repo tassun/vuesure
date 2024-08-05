@@ -1,6 +1,6 @@
 import $ from "jquery"
-import { startWaiting, openNewWindow, submitWindow, closeChildWindows}  from '@/assets/js/apputil.js'
-import { getApiUrl, getBaseUrl, getDefaultLanguage,  DEFAULT_CONTENT_TYPE } from "@/assets/js/appinfo";
+import { startWaiting, openNewWindow, submitWindow, closeChildWindows}  from '@/assets/js/app.util'
+import { getApiUrl, getBaseUrl, getDefaultLanguage,  DEFAULT_CONTENT_TYPE } from "@/assets/js/app.info";
 import { getAccessorToken, removeAccessorInfo, getAccessorInfo, saveAccessorInfo, getStorage, removeStorage, setupDiffie, setCurrentWindow } from "@/assets/js/messenger";
 
 export function openPage(app,accessor,favorite,callback) {

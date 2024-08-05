@@ -8,7 +8,7 @@
 <script>
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";
-import { openPage } from "@/assets/js/loginutil.js";
+import { openPage } from "@/assets/js/login.util.js";
 
 export default {
   setup() {

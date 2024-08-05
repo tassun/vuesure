@@ -14,9 +14,9 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { startApplication }  from '@/assets/js/apputil.js';
-import { getLabelModel } from "@/assets/js/labelutil.js";
-import { refreshScreen, logOut, validAccessToken, openPage } from "@/assets/js/loginutil.js";
+import { startApplication }  from '@/assets/js/app.util.js';
+import { getLabelModel } from "@/assets/js/label.util.js";
+import { refreshScreen, logOut, validAccessToken, openPage } from "@/assets/js/login.util.js";
 import { removeAccessorInfo } from "@/assets/js/messenger.js";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";

@@ -74,8 +74,8 @@ import $ from "jquery";
 import { ref, computed, watch, onActivated } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
-import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/appinfo.js';
-import { startWaiting, stopWaiting, alertbox, submitFailure }  from '@/assets/js/apputil.js';
+import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/app.info.js';
+import { startWaiting, stopWaiting, alertbox, submitFailure }  from '@/assets/js/app.util.js';
 import { getAccessorToken } from "@/assets/js/messenger.js";
 import { accessor } from "@/assets/js/accessor.js";
 
