@@ -11,8 +11,8 @@
 </template>
 <script>
 import { onActivated } from 'vue';
-import { getImgUrl } from "@/assets/js/app.info.js";
-import { openPage } from "@/assets/js/login.util.js";
+import { getImgUrl } from "@willsofts/will-app";
+import { openPage } from "@willsofts/will-app";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";
 

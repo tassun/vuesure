@@ -14,8 +14,8 @@
 <script>
 import $ from "jquery";
 import { ref } from 'vue';
-import { getApiUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/app.info.js";
-import { serializeParameters } from "@/assets/js/app.util.js";
+import { getApiUrl, DEFAULT_CONTENT_TYPE } from "@willsofts/will-app";
+import { serializeParameters } from "@willsofts/will-app";
 import { openPage } from "@/assets/js/login.util.js";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";

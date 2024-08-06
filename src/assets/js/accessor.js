@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { getDefaultLanguage } from './app.info';
+import { getDefaultLanguage } from '@willsofts/will-app';
 
 export const accessor = ref({
     lang: getDefaultLanguage(),

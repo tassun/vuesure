@@ -24,7 +24,7 @@
 <script>
 import $ from "jquery";
 import { ref } from 'vue';
-import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/app.info.js';
+import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@willsofts/will-app';
 
 export default {
   props: {

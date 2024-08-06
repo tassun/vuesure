@@ -33,8 +33,8 @@ a.tile.fa-box-title.fav-app:hover .todo { display: block; }
 <script>
 import $ from "jquery";
 import { ref } from 'vue';
-import { getApiUrl, getImgUrl, DEFAULT_CONTENT_TYPE } from "@/assets/js/app.info.js";
-import { submitFailure, serializeParameters } from "@/assets/js/app.util.js";
+import { getApiUrl, getImgUrl, DEFAULT_CONTENT_TYPE } from "@willsofts/will-app";
+import { submitFailure, serializeParameters } from "@willsofts/will-app";
 import { openPage } from "@/assets/js/login.util.js";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";

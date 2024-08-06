@@ -1,7 +1,7 @@
 import $ from "jquery"
-import { startWaiting, openNewWindow, submitWindow, closeChildWindows}  from '@/assets/js/app.util'
-import { getApiUrl, getBaseUrl, getDefaultLanguage,  DEFAULT_CONTENT_TYPE } from "@/assets/js/app.info";
-import { getAccessorToken, removeAccessorInfo, getAccessorInfo, saveAccessorInfo, getStorage, removeStorage, setupDiffie, setCurrentWindow } from "@/assets/js/messenger";
+import { startWaiting, openNewWindow, submitWindow, closeChildWindows}  from '@willsofts/will-app'
+import { getApiUrl, getBaseUrl, getDefaultLanguage,  DEFAULT_CONTENT_TYPE } from "@willsofts/will-app";
+import { getAccessorToken, removeAccessorInfo, getAccessorInfo, saveAccessorInfo, getStorage, removeStorage, setupDiffie, setCurrentWindow } from "@willsofts/will-app";
 
 export function openPage(app,accessor,favorite,callback) {
 	return openProgram(app,accessor,favorite,callback);

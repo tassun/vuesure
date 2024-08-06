@@ -14,10 +14,10 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { startApplication }  from '@/assets/js/app.util.js';
-import { getLabelModel } from "@/assets/js/label.util.js";
+import { startApplication }  from '@willsofts/will-app';
+import { getLabelModel } from "@willsofts/will-app";
 import { refreshScreen, logOut, validAccessToken, openPage } from "@/assets/js/login.util.js";
-import { removeAccessorInfo } from "@/assets/js/messenger.js";
+import { removeAccessorInfo } from "@willsofts/will-app";
 import { accessor } from "@/assets/js/accessor.js";
 import { favorite } from "@/assets/js/favorite.js";
 import { isSSOSignedIn, doSSOLogout } from "@/assets/js/auth.js";

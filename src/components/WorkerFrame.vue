@@ -11,7 +11,7 @@
 <script>
 import $ from "jquery";
 import { ref } from 'vue';
-import { stopWaiting }  from '@/assets/js/app.util.js';
+import { stopWaiting }  from '@willsofts/will-app';
 import { refreshScreen, hideWorkSpace } from "@/assets/js/login.util.js";
 import { accessor } from "@/assets/js/accessor.js";
 import WorkerMenu from "./menu/WorkerMenu.vue";

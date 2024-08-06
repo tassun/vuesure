@@ -63,7 +63,7 @@ import { ref } from 'vue';
 import SiderBar from "./SiderBar.vue";
 import FavorMenu from "./FavorMenu.vue";
 import RecentMenu from "./RecentMenu.vue";
-import { setDefaultLanguage } from "@/assets/js/app.info.js";
+import { setDefaultLanguage } from "@willsofts/will-app";
 import { accessor } from "@/assets/js/accessor.js";
 
 export default {

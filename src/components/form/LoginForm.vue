@@ -56,9 +56,9 @@ import $ from "jquery";
 import { ref, computed } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
-import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/app.info.js';
-import { startWaiting, stopWaiting, submitFailure, alertbox }  from '@/assets/js/app.util.js';
-import { saveAccessorInfo, setupDiffie } from "@/assets/js/messenger.js";
+import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@willsofts/will-app';
+import { startWaiting, stopWaiting, submitFailure, alertbox }  from '@willsofts/will-app';
+import { saveAccessorInfo, setupDiffie } from "@willsofts/will-app";
 import { startSSO } from "@/assets/js/auth.js";
 import SSOPanel from "./SSOPanel.vue";
 

@@ -106,8 +106,8 @@ import $ from "jquery";
 import { ref, computed, watch, onActivated } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers, email } from '@vuelidate/validators';
-import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@/assets/js/app.info.js';
-import { startWaiting, stopWaiting, submitFailure, alertbox, serializeParameters, confirmSave, successbox }  from '@/assets/js/app.util.js';
+import { DEFAULT_CONTENT_TYPE, getApiUrl }  from '@willsofts/will-app';
+import { startWaiting, stopWaiting, submitFailure, alertbox, serializeParameters, confirmSave, successbox }  from '@willsofts/will-app';
 import { accessor } from "@/assets/js/accessor.js";
 import LoadingPage from "../../controls/LoadingPage.vue";
 
