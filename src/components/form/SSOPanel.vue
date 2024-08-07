@@ -30,7 +30,7 @@ export default {
   props: {
     labels: Object,    
   },
-  emits: ["sso-selected"],
+  emits: ["sso-selected","sso-setting"],
   setup() {
     const ssolists = ref([]);
     const loadingVisible = ref(true);
@@ -56,12 +56,14 @@ export default {
             contentType: DEFAULT_CONTENT_TYPE,
             error : () => {
                 this.loadingVisible = false;
+                this.$emit("sso-setting",this.ssolists);
             },
             success: (data,status,transport) => {
                 this.loadingVisible = false;
                 console.log("loadSettings: success",transport.responseText);                
                 if(data.body?.rows) {
                     this.ssolists = data.body.rows;
+                    this.$emit("sso-setting",this.ssolists);
                 }                
             },
         });	

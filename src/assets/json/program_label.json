@@ -3,7 +3,7 @@
 		"language": "TH",
 		"label": [
 			{"name": "system_label", "value": "Assure"},
-			{"name": "login_label", "value": "เข้าระบบ"},
+			{"name": "login_label", "value": "ยินดีต้อนรับ"},
 			{"name": "username_label", "value": "บัญชีผู้ใช้"},
 			{"name": "password_label", "value": "รหัสผ่าน"},
 			{"name": "forgot_label", "value": "ลืมรหัสผ่าน"},
@@ -49,7 +49,7 @@
 		"language": "EN",
 		"label": [
 			{"name": "system_label", "value": "Assure"},
-			{"name": "login_label", "value": "Log In"},
+			{"name": "login_label", "value": "Welcome"},
 			{"name": "username_label", "value": "User name"},
 			{"name": "password_label", "value": "Password"},
 			{"name": "forgot_label", "value": "Forgot Password"},
