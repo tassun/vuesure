@@ -162,7 +162,7 @@ export default {
         url: getApiUrl()+"/api/sign/signin",
         type: "POST",
         contentType: DEFAULT_CONTENT_TYPE,
-        data: params, 
+        data: JSON.stringify(params), 
         dataType: "json",
         error : function(transport,status,errorThrown) {
           submitFailure(transport,status,errorThrown,false); 

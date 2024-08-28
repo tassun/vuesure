@@ -170,7 +170,7 @@ export default {
       startWaiting();
       $.ajax({
           url: getApiUrl()+"/api/factor/get",
-          data: formdata,
+          data: JSON.stringify(formdata),
           type: "POST",
           dataType: "json",
           contentType: DEFAULT_CONTENT_TYPE,
@@ -203,7 +203,7 @@ export default {
       startWaiting();
       $.ajax({
         url: getApiUrl()+"/api/factor/verify",
-        data: formdata,
+        data: JSON.stringify(formdata),
         type: "POST",
         dataType: "json",
         contentType: DEFAULT_CONTENT_TYPE,

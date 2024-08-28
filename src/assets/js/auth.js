@@ -13,7 +13,7 @@ export function startSSO(domainid,callback) {
     $.ajax({
         url: getBaseUrl()+"/auth/config/"+domainid,
         type: "POST",
-        data: {ajax: true}, 
+        data: JSON.stringify({ajax: true}), 
         dataType: "json",
         contentType: DEFAULT_CONTENT_TYPE,
         error : function(transport,status,errorThrown) { 
@@ -161,9 +161,9 @@ export function tryLogIn(username) {
     $.ajax({
         url: getApiUrl()+"/api/sign/access",
         type: "POST",
-        contentType: DEFAULT_CONTENT_TYPE,
-        data: {username: username}, 
+        data: JSON.stringify({username: username}), 
         dataType: "json",
+        contentType: DEFAULT_CONTENT_TYPE,
         error : function(transport,status,errorThrown) { 
             submitFailure(transport,status,errorThrown,false); 
         },

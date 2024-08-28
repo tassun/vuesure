@@ -179,7 +179,7 @@ export default {
       let formdata = { capid: this.localData.capid };
       $.ajax({
           url: getApiUrl()+"/api/captcha/create",
-          data: formdata,
+          data: JSON.stringify(formdata),
           type: "POST",
           dataType: "json",
           contentType: DEFAULT_CONTENT_TYPE,
@@ -219,7 +219,7 @@ export default {
       startWaiting();
       $.ajax({
         url: getApiUrl()+"/api/forgot/password",
-        data: formdata,
+        data: JSON.stringify(formdata),
         type: "POST",
         dataType: "json",
         contentType: DEFAULT_CONTENT_TYPE,
